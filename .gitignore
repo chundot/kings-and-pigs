@@ -1,5 +1,6 @@
 .idea
 .import
 .mono
+.vscode
 *.translation
 export_presets.cfg

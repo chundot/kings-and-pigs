@@ -3,11 +3,8 @@
 public enum LayerEnum
 {
     Tile = 0,
-    Player,
-    PlayerHitBox,
-    PlayerAttackBox,
-    Enemy,
-    EnemyHitBox,
-    EnemyAttackBox,
+    Rb,
+    HitBox,
+    AttackBox,
     Crate
 }

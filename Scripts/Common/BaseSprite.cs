@@ -1,5 +1,6 @@
 ﻿using System;
 using Godot;
+using kingsandpigs.Scripts.Extensions;
 
 namespace kingsandpigs.Scripts.Common;
 
@@ -16,6 +17,7 @@ public class BaseSprite<TEnum> : KinematicBody2D where TEnum : Enum
     protected DlgBox Dlg;
     protected TEnum CurState;
     protected TEnum NextState = default;
+    protected float InvincibleTimer = 0.4f;
     private Node2D Info;
 
     public event Action<int, int> OnHealthChange;
@@ -33,12 +35,13 @@ public class BaseSprite<TEnum> : KinematicBody2D where TEnum : Enum
 
     public override void _PhysicsProcess(float delta)
     {
-        StateUpdate();
+        StateUpdate(delta);
         GravityHandler();
         Velocity = MoveAndSlide(Velocity, Vector2.Up);
+        InvincibleTimer = InvincibleTimer < -.1f ? InvincibleTimer : InvincibleTimer - delta;
     }
 
-    protected virtual void StateUpdate()
+    protected virtual void StateUpdate(float delta)
     {
     }
 
@@ -93,7 +96,12 @@ public class BaseSprite<TEnum> : KinematicBody2D where TEnum : Enum
 
     public virtual void OnHitBoxEnter(Area2D area)
     {
-        GD.Print(area.GetType().Name);
+        var isDmgFromAttack = area.GetLayerBit(LayerEnum.AttackBox);
+        if (isDmgFromAttack && InvincibleTimer <= 0)
+        {
+            InvincibleTimer = 0.3f;
+            HealthChange(1);
+        }
     }
 
     #endregion

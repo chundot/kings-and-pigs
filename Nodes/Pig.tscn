@@ -488,6 +488,8 @@ extents = Vector2( 5.5, 7.5 )
 extents = Vector2( 5, 8.5 )
 
 [node name="Pig" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource( 9 )
 
 [node name="SpriteAnchor" type="Position2D" parent="."]
@@ -503,7 +505,7 @@ hframes = 11
 [node name="AttackBox" type="Area2D" parent="SpriteAnchor"]
 position = Vector2( 33, 0 )
 collision_layer = 8
-collision_mask = 33
+collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
 polygon = PoolVector2Array( -42, -19, -40, -18, -40, -16, -45, -13, -47, -9, -48, -9, -47, -16 )
@@ -532,13 +534,15 @@ __meta__ = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( -0.5, 1.5 )
 shape = SubResource( 60 )
 
 [node name="DlgBox" parent="." instance=ExtResource( 10 )]
-position = Vector2( -17, -17 )
+position = Vector2( 17, -17 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
@@ -548,4 +552,5 @@ __meta__ = {
 }
 
 [connection signal="body_entered" from="SpriteAnchor/AttackBox" to="." method="OnAttackBoxEnter"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="AnimationFinished"]
 [connection signal="area_entered" from="HitBox" to="." method="OnHitBoxEnter"]

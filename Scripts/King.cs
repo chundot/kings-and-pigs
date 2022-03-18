@@ -1,5 +1,5 @@
-using Godot;
 using System;
+using Godot;
 using kingsandpigs.Scripts;
 using kingsandpigs.Scripts.Common;
 using kingsandpigs.Scripts.Extensions;
@@ -13,9 +13,10 @@ public class King : BaseSprite<King.State>
         base._Ready();
         TransTo(State.Idle);
         OnHealthChange += GetNode<LevelHUDManager>("../LevelHUD").HealthChange;
+        OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
     }
 
-    protected override void StateUpdate()
+    protected override void StateUpdate(float delta)
     {
         if (Input.IsActionJustPressed("suicide")) HealthChange(1);
         if (Input.IsActionJustPressed("recover")) HealthChange(-1);
@@ -28,6 +29,7 @@ public class King : BaseSprite<King.State>
             State.Fall => Fall(),
             State.Ground => Ground(),
             State.Attack => Attack(),
+            State.Hit => Hit(),
             _ => CurState
         };
 
@@ -40,6 +42,7 @@ public class King : BaseSprite<King.State>
         if (state != CurState) TransTo(state);
     }
 
+    #region STATEFUNC
     private State Idle()
     {
         MovementHandler();
@@ -92,6 +95,13 @@ public class King : BaseSprite<King.State>
         return CurState;
     }
 
+    private State Hit()
+    {
+        SpeedHandler();
+        return CurState;
+    }
+    #endregion
+
     private void MovementHandler(float factor = 1f)
     {
         var dir = Input.GetActionStrength("right") - Input.GetActionStrength("left");
@@ -140,21 +150,12 @@ public class King : BaseSprite<King.State>
 
     public void OnAnimationFinished(string name)
     {
-        Enum.TryParse(name, out State state);
+        _ = Enum.TryParse(name, out State state);
         NextState = state switch
         {
             State.Attack => !IsOnFloor() ? State.Fall : State.Idle,
-            State.Ground => State.Idle,
+            State.Ground or State.Hit => State.Idle,
             _ => NextState
         };
-    }
-
-    public override void OnHitBoxEnter(Area2D area)
-    {
-        var isDmgFromPig = area.GetLayerBit(LayerEnum.EnemyAttackBox);
-        if (isDmgFromPig)
-        {
-            GD.Print("ouch!");
-        }
     }
 }

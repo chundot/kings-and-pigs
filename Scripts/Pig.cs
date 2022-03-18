@@ -7,13 +7,14 @@ namespace kingsandpigs.Scripts;
 
 public class Pig : BaseSprite<Pig.State>
 {
+    private float _timer = 2f;
     public override void _Ready()
     {
         base._Ready();
         TransTo(State.Idle);
     }
 
-    protected override void StateUpdate()
+    protected override void StateUpdate(float delta)
     {
         var state = CurState switch
         {
@@ -33,17 +34,17 @@ public class Pig : BaseSprite<Pig.State>
             state = NextState;
             NextState = default;
         }
-
-        if (NextState != default)
-        {
-            state = NextState;
-            NextState = default;
-        }
         if (state != CurState) TransTo(state);
+        _timer -= delta;
     }
 
     private State Idle()
     {
+        if (_timer <= 0)
+        {
+            _timer = 2f;
+            return State.Attack;
+        }
         return CurState;
     }
 
@@ -61,17 +62,17 @@ public class Pig : BaseSprite<Pig.State>
     {
         return CurState;
     }
-    
+
     private State Ground()
     {
         return CurState;
     }
-    
+
     private State Hit()
     {
         return CurState;
     }
-    
+
     private State Run()
     {
         return CurState;
@@ -81,16 +82,7 @@ public class Pig : BaseSprite<Pig.State>
     {
         return CurState;
     }
-    
-    public override void OnHitBoxEnter(Area2D area)
-    {
-        var isDmgFromKing = area.GetLayerBit(LayerEnum.PlayerAttackBox);
-        if (isDmgFromKing)
-        {
-            GD.Print("ouch!");
-        }
-    }
-    
+
     public enum State
     {
         NoState = 0,
@@ -103,5 +95,15 @@ public class Pig : BaseSprite<Pig.State>
         Run,
         Jump
     }
-    
+
+    #region SLOTS
+    public void AnimationFinished(string name)
+    {
+        _ = Enum.TryParse(name, out State state);
+        if (state is State.Attack)
+        {
+            TransTo(State.Idle);
+        }
+    }
+    #endregion
 }

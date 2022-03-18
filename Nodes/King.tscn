@@ -595,6 +595,7 @@ extents = Vector2( 6.5, 12.5 )
 
 [node name="King" type="KinematicBody2D"]
 collision_layer = 2
+collision_mask = 3
 script = ExtResource( 11 )
 
 [node name="SpriteAnchor" type="Position2D" parent="."]
@@ -613,10 +614,10 @@ __meta__ = {
 [node name="AttackBox" type="Area2D" parent="SpriteAnchor"]
 position = Vector2( 33, 0 )
 collision_layer = 8
-collision_mask = 33
+collision_mask = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
-polygon = PoolVector2Array( -11, -11, -14, -15, -9, -25, 1, -25, 11, -10, 11, 11, 1, 21, -17, 27, -32, 25, -42, 20, -46, 15, -40, 15, -21, 18, -9, 9 )
+polygon = PoolVector2Array( -11, -11, -19, -15, -19, -26, -11, -27, 0, -21, 5, -13, 6, -3, 2, 7, -4, 13, -7, 13, -3, 0 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -649,7 +650,7 @@ __meta__ = {
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 64
+collision_mask = 8
 __meta__ = {
 "_edit_lock_": true
 }
