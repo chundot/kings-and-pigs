@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Nodes/Pig.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20.5, 9 )
+
+[node name="Node" type="Node"]
+
+[node name="Detect" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+position = Vector2( -0.5, 0 )
+shape = SubResource( 1 )
+
+[node name="Pig" parent="." instance=ExtResource( 1 )]
