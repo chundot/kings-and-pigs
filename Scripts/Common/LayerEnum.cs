@@ -1,10 +1,11 @@
-﻿namespace kingsandpigs.Scripts.Common;
-
-public enum LayerEnum
+﻿namespace kingsandpigs.Scripts.Common
 {
-    Tile = 0,
-    Rb,
-    HitBox,
-    AttackBox,
-    Crate
+    public enum LayerEnum
+    {
+        Tile = 0,
+        Rb,
+        HitBox,
+        AttackBox,
+        Crate
+    }
 }

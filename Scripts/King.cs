@@ -2,11 +2,10 @@ using System;
 using Godot;
 using kingsandpigs.Scripts;
 using kingsandpigs.Scripts.Common;
-using kingsandpigs.Scripts.Extensions;
 using kingsandpigs.Scripts.UI;
 
 
-public class King : BaseSprite<King.State>
+public class King : BaseStatedBody<King.State>
 {
     public override void _Ready()
     {

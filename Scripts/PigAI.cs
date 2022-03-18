@@ -1,21 +1,21 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
-namespace kingsandpigs.Scripts;
-
-public class PigAI : Node
+namespace kingsandpigs.Scripts
 {
-    private Pig _pig;
-    public override void _Ready()
+    public class PigAI : Node
     {
-        _pig = GetChild<Pig>(0);
-    }
-    
-    enum State
-    {
-        Idle = 0,
-        Wander,
-        Follow,
-        TryAttack
+        private Pig _pig;
+        public override void _Ready()
+        {
+            _pig = GetChild<Pig>(0);
+        }
+
+        enum State
+        {
+            Idle = 0,
+            Wander,
+            Follow,
+            TryAttack
+        }
     }
 }

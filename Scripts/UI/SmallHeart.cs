@@ -1,22 +1,23 @@
 using Godot;
-using System;
-
-public class SmallHeart : AnimatedSprite
+namespace kingsandpigs.Scripts.UI
 {
-    public void Hit()
+    public class SmallHeart : AnimatedSprite
     {
-        Play("Hit");
-    }
+        public void Hit()
+        {
+            Play("Hit");
+        }
 
-    public void Recover()
-    {
-        Visible = true;
-        Play("Idle");
-    }
+        public void Recover()
+        {
+            Visible = true;
+            Play("Idle");
+        }
 
-    public void OnAnimationFinished()
-    {
-        if (Animation is "Hit") Visible = false;
-    }
+        public void OnAnimationFinished()
+        {
+            if (Animation is "Hit") Visible = false;
+        }
 
+    }
 }

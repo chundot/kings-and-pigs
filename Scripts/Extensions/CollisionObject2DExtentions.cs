@@ -1,12 +1,12 @@
-﻿using Godot;
-using kingsandpigs.Scripts.Common;
+﻿using kingsandpigs.Scripts.Common;
 
-namespace kingsandpigs.Scripts.Extensions;
-
-public static class CollisionObject2DExtentions
+namespace Godot
 {
-    public static bool GetLayerBit(this CollisionObject2D obj, LayerEnum layer)
+    public static class CollisionObject2DExtentions
     {
-        return obj.GetCollisionLayerBit(layer.GetHashCode());
+        public static bool GetLayerBit(this CollisionObject2D obj, LayerEnum layer)
+        {
+            return obj.GetCollisionLayerBit(layer.GetHashCode());
+        }
     }
 }
