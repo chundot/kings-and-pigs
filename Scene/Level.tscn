@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/14-TileSets/Terrain (32x32).png" type="Texture" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Nodes/AiController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/12-Live and Coins/Live Bar.png" type="Texture" id=4]
 [ext_resource path="res://Scripts/UI/LevelHUDManager.cs" type="Script" id=5]
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=7]
@@ -492,6 +492,9 @@ tile_data = PoolIntArray( -65535, 0, 0, -65534, 0, 196614, -65533, 0, 262145, -6
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 324, 95 )
 
+[node name="Pig" parent="." instance=ExtResource( 3 )]
+position = Vector2( 437, 115 )
+
 [node name="LevelHUD" type="CanvasLayer" parent="."]
 scale = Vector2( 3, 3 )
 transform = Transform2D( 3, 0, 0, 3, 0, 0 )
@@ -504,9 +507,6 @@ texture = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Ai" parent="." instance=ExtResource( 3 )]
-position = Vector2( 442, 112 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 324, 120 )

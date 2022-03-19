@@ -15,11 +15,12 @@ namespace kingsandpigs.Scripts.Common
         protected int JumpForce = 280;
         protected Position2D SpriteAnchor;
         protected AnimationPlayer Player;
-        protected DlgBox Dlg;
+        public DlgBox Dlg;
         protected float InvincibleTimer = 0.4f;
         protected float AtkCD = .4f;
         protected Node2D Info;
         public event Action<int, int> OnHealthChange;
+        public Action OnDeath;
 
         public override void _Ready()
         {
@@ -79,6 +80,7 @@ namespace kingsandpigs.Scripts.Common
                 Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed + Vector2.Up * JumpForce / 2;
                 if (Health == 0)
                 {
+                    OnDeath?.Invoke();
                     Dlg.Display(DlgType.DeadIn);
                     area.GetParent<Position2D>().GetParent<BaseBody>().Dlg.Display(DlgType.LoserIn);
                 }

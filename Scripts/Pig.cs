@@ -6,7 +6,7 @@ namespace kingsandpigs.Scripts
 {
     public class Pig : BaseStatedBody<Pig.State>
     {
-        protected float AtkCD = 2f;
+        protected new float AtkCD = 2f;
         public override void _Ready()
         {
             base._Ready();
@@ -41,27 +41,32 @@ namespace kingsandpigs.Scripts
         private State Idle()
         {
             if (AtkHandler()) return State.Attack;
+            if (Mathf.Abs(Velocity.x) > 8) return State.Run;
             SpeedHandler();
             return CurState;
         }
 
         private State Attack()
         {
+            SpeedHandler();
             return CurState;
         }
 
         private State Dead()
         {
+            SpeedHandler();
             return CurState;
         }
 
         private State Fall()
         {
+            SpeedHandler();
             return CurState;
         }
 
         private State Ground()
         {
+            SpeedHandler();
             return CurState;
         }
 
@@ -73,11 +78,14 @@ namespace kingsandpigs.Scripts
 
         private State Run()
         {
+            SpeedHandler();
+            if (Mathf.Abs(Velocity.x) < 8) return State.Idle;
             return CurState;
         }
 
         private State Jump()
         {
+            SpeedHandler();
             return CurState;
         }
 
@@ -89,6 +97,12 @@ namespace kingsandpigs.Scripts
                 return true;
             }
             return false;
+        }
+        public void MovementHandler(float dir)
+        {
+            if (CurState is State.Hit or State.Dead or State.Attack) return;
+            SpriteAnchor.Scale = new Vector2(-dir, 1);
+            Velocity.x = Mathf.Lerp(Velocity.x, dir * Speed, 0.2f);
         }
 
         public enum State
@@ -111,7 +125,8 @@ namespace kingsandpigs.Scripts
             NextState = state switch
             {
                 State.Attack => !IsOnFloor() ? State.Fall : State.Idle,
-                State.Ground or State.Hit => State.Idle,
+                State.Ground => State.Idle,
+                State.Hit => Health > 0 ? State.Idle : State.Dead,
                 _ => NextState
             };
         }
