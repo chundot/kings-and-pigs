@@ -30,31 +30,5 @@ namespace kingsandpigs.Scripts.Common
         {
             Info.GetChild<Label>(0).Text = nextState.ToString();
         }
-
-        #region SLOTS
-
-        public virtual void OnAttackBoxEnter(Node2D body)
-        {
-            if (body is TileMap tileMap)
-            {
-                GD.Print(body.GetType().Name);
-            }
-        }
-
-        public virtual void OnHitBoxEnter(Area2D area)
-        {
-            var isDmgFromAttack = area.GetLayerBit(LayerEnum.AttackBox);
-            if (isDmgFromAttack && InvincibleTimer <= 0)
-            {
-                InvincibleTimer = 0.3f;
-                HealthChange(1);
-                if (health == 0)
-                {
-                    GD.Print(area.GetParent<Position2D>().GetParent<KinematicBody2D>().Name);
-                }
-            }
-        }
-
-        #endregion
     }
 }

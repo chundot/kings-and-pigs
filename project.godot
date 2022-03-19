@@ -94,6 +94,9 @@ sayhi={
 2d_physics/layer_3="HitBox"
 2d_physics/layer_4="AttackBox"
 2d_physics/layer_5="Crate"
+2d_physics/layer_6="PlayerHitBox"
+2d_physics/layer_7="ViewDetect"
+2d_physics/layer_8="AtkRange"
 
 [physics]
 

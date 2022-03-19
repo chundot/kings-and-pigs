@@ -1,11 +1,12 @@
 ﻿using System;
+using Godot;
 using kingsandpigs.Scripts.Common;
 
 namespace kingsandpigs.Scripts
 {
     public class Pig : BaseStatedBody<Pig.State>
     {
-        private float _timer = 2f;
+        protected float AtkCD = 2f;
         public override void _Ready()
         {
             base._Ready();
@@ -34,16 +35,13 @@ namespace kingsandpigs.Scripts
                 NextState = default;
             }
             if (state != CurState) TransTo(state);
-            _timer -= delta;
+            AtkCD -= delta;
         }
 
         private State Idle()
         {
-            if (_timer <= 0)
-            {
-                _timer = 2f;
-                return State.Attack;
-            }
+            if (AtkHandler()) return State.Attack;
+            SpeedHandler();
             return CurState;
         }
 
@@ -69,6 +67,7 @@ namespace kingsandpigs.Scripts
 
         private State Hit()
         {
+            SpeedHandler(.05f);
             return CurState;
         }
 
@@ -80,6 +79,16 @@ namespace kingsandpigs.Scripts
         private State Jump()
         {
             return CurState;
+        }
+
+        public bool AtkHandler()
+        {
+            if (CanAttack && AtkCD <= 0)
+            {
+                AtkCD = 2f;
+                return true;
+            }
+            return false;
         }
 
         public enum State

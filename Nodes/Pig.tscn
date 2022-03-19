@@ -72,7 +72,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -52, -11, -47, -17, -44, -15, -47, -10, -47, -4, -43, 3, -45, 3, -51, -3, -52, -6 ), PoolVector2Array( -42, -19, -40, -18, -40, -16, -45, -13, -47, -9, -48, -9, -47, -16 ) ]
+"values": [ PoolVector2Array( -17, -15, -15, -17, -12, -17, -11, -16, -11, -12, -13, -4, -9, 3, -14, 3, -17, -1, -19, -5, -19, -11 ), PoolVector2Array( -10, -19, -7, -19, -7, -16, -12, -13, -14, -9, -15, -9, -15, -16 ) ]
 }
 
 [sub_resource type="Animation" id=57]
@@ -427,6 +427,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteAnchor/AttackBox/CollisionPolygon2D:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( -17, -15, -15, -17, -12, -17, -11, -16, -11, -12, -13, -4, -9, 3, -14, 3, -17, -1, -19, -5, -19, -11 ) ]
+}
 
 [sub_resource type="Animation" id=54]
 resource_name = "Run"
@@ -503,12 +515,11 @@ offset = Vector2( -3, -5 )
 hframes = 11
 
 [node name="AttackBox" type="Area2D" parent="SpriteAnchor"]
-position = Vector2( 33, 0 )
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
-polygon = PoolVector2Array( -42, -19, -40, -18, -40, -16, -45, -13, -47, -9, -48, -9, -47, -16 )
+polygon = PoolVector2Array( -17, -15, -15, -17, -12, -17, -11, -16, -11, -12, -13, -4, -9, 3, -14, 3, -17, -1, -19, -5, -19, -11 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

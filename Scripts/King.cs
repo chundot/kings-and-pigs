@@ -2,7 +2,6 @@ using System;
 using Godot;
 using kingsandpigs.Scripts;
 using kingsandpigs.Scripts.Common;
-using kingsandpigs.Scripts.UI;
 
 
 public class King : BaseStatedBody<King.State>
@@ -11,7 +10,7 @@ public class King : BaseStatedBody<King.State>
     {
         base._Ready();
         TransTo(State.Idle);
-        OnHealthChange += GetNode<LevelHUDManager>("../LevelHUD").HealthChange;
+
         OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
     }
 
@@ -29,6 +28,7 @@ public class King : BaseStatedBody<King.State>
             State.Ground => Ground(),
             State.Attack => Attack(),
             State.Hit => Hit(),
+            State.Dead => Dead(),
             _ => CurState
         };
 
@@ -45,6 +45,7 @@ public class King : BaseStatedBody<King.State>
     private State Idle()
     {
         MovementHandler();
+        SpeedHandler();
         if (JumpHandler()) return State.Jump;
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) > 12) return State.Run;
@@ -57,6 +58,7 @@ public class King : BaseStatedBody<King.State>
     private State Run()
     {
         MovementHandler();
+        SpeedHandler();
         if (JumpHandler()) return State.Jump;
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) < 10) return State.Idle;
@@ -68,6 +70,7 @@ public class King : BaseStatedBody<King.State>
     private State Jump()
     {
         MovementHandler();
+        SpeedHandler();
         if (AttackHandler()) return State.Attack;
         if (Velocity.y > 0) return State.Fall;
         return CurState;
@@ -76,6 +79,7 @@ public class King : BaseStatedBody<King.State>
     private State Fall()
     {
         MovementHandler();
+        SpeedHandler();
         if (AttackHandler()) return State.Attack;
         if (IsOnFloor()) return State.Ground;
         return CurState;
@@ -83,6 +87,7 @@ public class King : BaseStatedBody<King.State>
 
     private State Ground()
     {
+        SpeedHandler();
         if (JumpHandler(1.1f)) return State.Jump;
         SpeedHandler(0.1f);
         return CurState;
@@ -96,7 +101,13 @@ public class King : BaseStatedBody<King.State>
 
     private State Hit()
     {
-        SpeedHandler();
+        SpeedHandler(.05f);
+        return CurState;
+    }
+
+    private State Dead()
+    {
+        SpeedHandler(.1f);
         return CurState;
     }
     #endregion
@@ -104,8 +115,8 @@ public class King : BaseStatedBody<King.State>
     private void MovementHandler(float factor = 1f)
     {
         var dir = Input.GetActionStrength("right") - Input.GetActionStrength("left");
-        if (dir != 0) SpriteAnchor.Scale = new Vector2(dir, 1);
-        Velocity.x = dir * Speed * factor;
+        if (dir != 0) SpriteAnchor.Scale = new Vector2(-dir, 1);
+        if (dir != 0) Velocity.x = dir * Speed * factor;
     }
 
     private bool JumpHandler(float factor = 1f)
@@ -125,7 +136,7 @@ public class King : BaseStatedBody<King.State>
         if (Input.IsActionJustPressed("attack"))
         {
             TransTo(State.Attack);
-            Velocity += SpriteAnchor.Scale.x * Speed * 1.2f * Vector2.Right;
+            Velocity += -SpriteAnchor.Scale.x * Speed * 1.2f * Vector2.Right;
             return true;
         }
 
@@ -153,7 +164,8 @@ public class King : BaseStatedBody<King.State>
         NextState = state switch
         {
             State.Attack => !IsOnFloor() ? State.Fall : State.Idle,
-            State.Ground or State.Hit => State.Idle,
+            State.Ground => State.Idle,
+            State.Hit => Health > 0 ? State.Idle : State.Dead,
             _ => NextState
         };
     }

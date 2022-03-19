@@ -74,7 +74,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ PoolVector2Array( -11, -11, -14, -15, -9, -25, 1, -25, 11, -10, 11, 11, 1, 21, -17, 27, -32, 25, -42, 20, -46, 15, -40, 15, -21, 18, -9, 9 ), PoolVector2Array( -11, -11, -19, -15, -19, -26, -11, -27, 0, -21, 5, -13, 6, -3, 2, 7, -4, 13, -7, 13, -3, 0 ) ]
+"values": [ PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 ), PoolVector2Array( -14, -16, -14, -23, -17, -27, -24, -27, -33, -23, -40, -14, -40, -3, -37, 5, -30, 13, -27, 13, -31, -1 ) ]
 }
 
 [sub_resource type="Animation" id=70]
@@ -533,6 +533,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpriteAnchor/AttackBox/CollisionPolygon2D:polygon")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 ) ]
+}
 
 [sub_resource type="Animation" id=64]
 resource_name = "Run"
@@ -604,21 +616,20 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="SpriteAnchor"]
-position = Vector2( 7, -2 )
+position = Vector2( -8, -2 )
 texture = ExtResource( 9 )
+flip_h = true
 hframes = 11
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="AttackBox" type="Area2D" parent="SpriteAnchor"]
-position = Vector2( 33, 0 )
 collision_layer = 8
 collision_mask = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
-polygon = PoolVector2Array( -11, -11, -19, -15, -19, -26, -11, -27, 0, -21, 5, -13, 6, -3, 2, 7, -4, 13, -7, 13, -3, 0 )
-disabled = true
+polygon = PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 69 )
@@ -649,8 +660,8 @@ __meta__ = {
 }
 
 [node name="HitBox" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 8
+collision_layer = 32
+collision_mask = 72
 __meta__ = {
 "_edit_lock_": true
 }

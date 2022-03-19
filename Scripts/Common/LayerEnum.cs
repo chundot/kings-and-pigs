@@ -6,6 +6,9 @@
         Rb,
         HitBox,
         AttackBox,
-        Crate
+        Crate,
+        PlayerHitBox,
+        ViewDetect,
+        AtkRange
     }
 }
