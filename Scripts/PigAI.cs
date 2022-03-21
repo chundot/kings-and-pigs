@@ -3,25 +3,16 @@ using kingsandpigs.Scripts.Common;
 
 namespace kingsandpigs.Scripts
 {
-    public class PigAI : Node2D
+    public class PigAI : BaseAI<Pig, PigAI.State>
     {
-        private Pig _pig;
         private Area2D _target;
-        private State CurState = State.Idle;
-        private State NextState = default;
-        private bool _isDead = false;
-        private float _reactionTimer = 1f;
         public override void _Ready()
         {
-            _pig = GetParent<Position2D>().GetParent<Pig>();
-            _pig.OnDeath = () =>
-            {
-                QueueFree();
-                _isDead = true;
-            };
+            CurState = State.Idle;
+            base._Ready();
         }
 
-        public override void _PhysicsProcess(float delta)
+        protected override void StateUpdate()
         {
             var state = CurState switch
             {
@@ -37,7 +28,6 @@ namespace kingsandpigs.Scripts
                 NextState = default;
             }
             else CurState = state;
-            _reactionTimer = _reactionTimer < 0 ? _reactionTimer : _reactionTimer - delta;
         }
 
         private State Idle()
@@ -52,7 +42,7 @@ namespace kingsandpigs.Scripts
         {
             if (_target is null) return State.Idle;
             var dir = GlobalPosition.x > _target.GlobalPosition.x ? -1 : 1;
-            _pig.MovementHandler(dir);
+            Body.MovementHandler(dir);
             return CurState;
         }
         private State TryAttack()
@@ -62,33 +52,34 @@ namespace kingsandpigs.Scripts
         #region SLOTS
         public void OnAtkRangeEntered(Area2D _)
         {
-            if (_isDead) return;
-            _pig.CanAttack = true;
+            if (IsDead) return;
+            Body.CanAttack = true;
             NextState = State.TryAttack;
         }
 
         public void OnAtkRangeExited(Area2D _)
         {
-            if (_isDead) return;
-            _pig.CanAttack = false;
+            if (IsDead) return;
+            Body.CanAttack = false;
             NextState = State.Follow;
         }
 
         public void OnViewRangeEntered(Area2D area)
         {
-            if (_isDead) return;
-            _pig.Dlg.Display(DlgType.ExcIn);
+            if (IsDead) return;
+            Body.Dlg.Display(DlgType.ExcIn);
             _target = area;
             NextState = State.Follow;
         }
         public void OnViewRangeExited(Area2D _)
         {
-            if (_isDead) return;
-            _pig.Dlg.Display(DlgType.ItgIn);
+            if (IsDead) return;
+            _target = null;
+            Body.Dlg.Display(DlgType.ItgIn);
             NextState = State.Idle;
         }
         #endregion
-        enum State
+        public enum State
         {
             NoState = 0,
             Idle,

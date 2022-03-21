@@ -1,20 +1,32 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace kingsandpigs.Scripts.Common
 {
-    public class BaseAi<TBody> : Node
+    public class BaseAI<TBody, TState> : Node2D where TBody : BaseBody where TState : Enum
     {
-        private TBody _body;
+        protected TBody Body;
+        protected TState CurState = default;
+        protected TState NextState = default;
+        protected bool IsDead = false;
 
+        protected float TransTimer = 1f;
         public override void _Ready()
         {
+            Body = GetParent<Position2D>().GetParent<TBody>();
+            Body.OnDeath = () =>
+            {
+                QueueFree();
+                IsDead = true;
+            };
+        }
+        public override void _PhysicsProcess(float delta)
+        {
+            StateUpdate();
+            TransTimer = TransTimer < 0 ? TransTimer : TransTimer - delta;
         }
 
-        enum State
-        {
-            Idle = 0,
-            Wander
-        }
+        protected virtual void StateUpdate() { }
     }
 
 }
