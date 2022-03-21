@@ -6,12 +6,15 @@ namespace kingsandpigs.Scripts.UI
     public class LevelHUDManager : CanvasLayer
     {
         private TextureRect _liveBar;
+        private Label _diamondLabel;
         private readonly List<SmallHeart> _hearts = new();
+        private int _diamondNum = 0;
 
         public override void _Ready()
         {
             InitHeart();
             _liveBar = GetChild<TextureRect>(0);
+            _diamondLabel = GetChild<Label>(1);
             _hearts.ForEach(h => _liveBar.AddChild(h));
         }
 
@@ -31,6 +34,12 @@ namespace kingsandpigs.Scripts.UI
         {
             if (newVal < oldVal) _hearts[newVal].Hit();
             else if (newVal > oldVal) _hearts[oldVal].Recover();
+        }
+
+        public void DiamondChange(int num)
+        {
+            _diamondNum += num;
+            _diamondLabel.Text = _diamondNum.ToString();
         }
     }
 }

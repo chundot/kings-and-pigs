@@ -8,7 +8,9 @@ public class PlayerController : Node2D
     public override void _Ready()
     {
         _body = GetChild<BaseBody>(0);
-        _body.OnHealthChange += GetNode<LevelHUDManager>("../LevelHUD").HealthChange;
+        var hud = GetNode<LevelHUDManager>("../LevelHUD");
+        _body.OnHealthChange += hud.HealthChange;
+        _body.OnDiamondChanged += hud.DiamondChange;
     }
 
 }

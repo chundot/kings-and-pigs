@@ -10,6 +10,7 @@ namespace kingsandpigs.Scripts
         private State CurState = State.Idle;
         private State NextState = default;
         private bool _isDead = false;
+        private float _reactionTimer = 1f;
         public override void _Ready()
         {
             _pig = GetParent<Position2D>().GetParent<Pig>();
@@ -36,7 +37,7 @@ namespace kingsandpigs.Scripts
                 NextState = default;
             }
             else CurState = state;
-
+            _reactionTimer = _reactionTimer < 0 ? _reactionTimer : _reactionTimer - delta;
         }
 
         private State Idle()
@@ -63,14 +64,14 @@ namespace kingsandpigs.Scripts
         {
             if (_isDead) return;
             _pig.CanAttack = true;
-            CurState = State.TryAttack;
+            NextState = State.TryAttack;
         }
 
         public void OnAtkRangeExited(Area2D _)
         {
             if (_isDead) return;
             _pig.CanAttack = false;
-            CurState = State.Follow;
+            NextState = State.Follow;
         }
 
         public void OnViewRangeEntered(Area2D area)
@@ -78,13 +79,13 @@ namespace kingsandpigs.Scripts
             if (_isDead) return;
             _pig.Dlg.Display(DlgType.ExcIn);
             _target = area;
-            CurState = State.Follow;
+            NextState = State.Follow;
         }
         public void OnViewRangeExited(Area2D _)
         {
             if (_isDead) return;
             _pig.Dlg.Display(DlgType.ItgIn);
-            CurState = State.Idle;
+            NextState = State.Idle;
         }
         #endregion
         enum State

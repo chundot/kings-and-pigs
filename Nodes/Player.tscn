@@ -10,6 +10,7 @@ extents = Vector2( 16.5, 18.5 )
 script = ExtResource( 2 )
 
 [node name="King" parent="." instance=ExtResource( 1 )]
+z_index = 10
 
 [node name="Detect" type="Area2D" parent="King"]
 collision_layer = 64

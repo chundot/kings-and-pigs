@@ -9,6 +9,8 @@
         Crate,
         PlayerHitBox,
         ViewDetect,
-        AtkRange
+        AtkRange,
+        DeadBody,
+        Diamond
     }
 }

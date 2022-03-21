@@ -97,6 +97,8 @@ sayhi={
 2d_physics/layer_6="PlayerHitBox"
 2d_physics/layer_7="ViewDetect"
 2d_physics/layer_8="AtkRange"
+2d_physics/layer_9="DeadBody"
+2d_physics/layer_10="Diamond"
 
 [physics]
 

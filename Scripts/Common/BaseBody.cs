@@ -20,6 +20,7 @@ namespace kingsandpigs.Scripts.Common
         protected float AtkCD = .4f;
         protected Node2D Info;
         public event Action<int, int> OnHealthChange;
+        public Action<int> OnDiamondChanged;
         public Action OnDeath;
 
         public override void _Ready()
@@ -81,6 +82,7 @@ namespace kingsandpigs.Scripts.Common
                 if (Health == 0)
                 {
                     OnDeath?.Invoke();
+                    OnDeath = null;
                     Dlg.Display(DlgType.DeadIn);
                     area.GetParent<Position2D>().GetParent<BaseBody>().Dlg.Display(DlgType.LoserIn);
                 }

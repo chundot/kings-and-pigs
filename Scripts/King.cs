@@ -29,6 +29,8 @@ public class King : BaseStatedBody<King.State>
             State.Attack => Attack(),
             State.Hit => Hit(),
             State.Dead => Dead(),
+            State.DoorIn => DoorIn(),
+            State.DoorOut => DoorOut(),
             _ => CurState
         };
 
@@ -110,6 +112,16 @@ public class King : BaseStatedBody<King.State>
         SpeedHandler(.1f);
         return CurState;
     }
+    private State DoorIn()
+    {
+        SpeedHandler();
+        return CurState;
+    }
+    private State DoorOut()
+    {
+        SpeedHandler();
+        return CurState;
+    }
     #endregion
 
     private void MovementHandler(float factor = 1f)
@@ -168,5 +180,15 @@ public class King : BaseStatedBody<King.State>
             State.Hit => Health > 0 ? State.Idle : State.Dead,
             _ => NextState
         };
+    }
+
+    public void OnBodyEntered(Node2D body)
+    {
+        if (body is Diamond d)
+        {
+            if (d.CurState is Diamond.State.Hit) return;
+            d.ToHit();
+            OnDiamondChanged(1);
+        }
     }
 }
