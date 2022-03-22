@@ -7,7 +7,7 @@ namespace kingsandpigs.Scripts.UI
     {
         private TextureRect _liveBar;
         private Label _diamondLabel;
-        private readonly List<SmallHeart> _hearts = new();
+        private readonly List<SmallHeart> _hearts = new List<SmallHeart>();
         private int _diamondNum = 0;
 
         public override void _Ready()

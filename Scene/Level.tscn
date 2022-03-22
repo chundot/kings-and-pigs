@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Assets/14-TileSets/Terrain (32x32).png" type="Texture" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/UI/LevelHUDManager.cs" type="Script" id=5]
 [ext_resource path="res://Nodes/Diamond.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=7]
+[ext_resource path="res://Nodes/Crate/Crate.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/12-Live and Coins/Small Diamond (18x14).png" type="Texture" id=10]
 [ext_resource path="res://Assets/15-Font/BMFont.fnt" type="BitmapFont" id=11]
 
@@ -552,10 +553,10 @@ __meta__ = {
 }
 
 [node name="DiamonLabel" type="Label" parent="LevelHUD"]
-margin_left = 27.6667
-margin_top = 26.0
-margin_right = 65.6667
-margin_bottom = 98.0
+margin_left = 34.0
+margin_top = 27.0
+margin_right = 72.0
+margin_bottom = 99.0
 custom_fonts/font = ExtResource( 11 )
 text = "0"
 __meta__ = {
@@ -565,7 +566,7 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="LevelHUD/DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 6
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -581,3 +582,7 @@ smoothing_enabled = true
 smoothing_speed = 4.0
 
 [node name="Diamond" parent="." instance=ExtResource( 6 )]
+position = Vector2( 271, 36 )
+
+[node name="Crate" parent="." instance=ExtResource( 8 )]
+position = Vector2( 433, 60 )

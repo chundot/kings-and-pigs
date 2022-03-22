@@ -98,7 +98,8 @@ sayhi={
 2d_physics/layer_7="ViewDetect"
 2d_physics/layer_8="AtkRange"
 2d_physics/layer_9="DeadBody"
-2d_physics/layer_10="Diamond"
+2d_physics/layer_10="Item"
+2d_physics/layer_11="OtherItem"
 
 [physics]
 

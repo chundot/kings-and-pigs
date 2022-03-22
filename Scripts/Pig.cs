@@ -9,6 +9,7 @@ namespace kingsandpigs.Scripts
         protected new float AtkCD = 2f;
         public override void _Ready()
         {
+            Speed = 160;
             base._Ready();
             OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
             TransTo(State.Idle);
@@ -73,6 +74,8 @@ namespace kingsandpigs.Scripts
         private State Hit()
         {
             SpeedHandler(.05f);
+            if (IsOnFloor())
+                return Health > 0 ? State.Hit : State.Dead;
             return CurState;
         }
 
@@ -100,7 +103,7 @@ namespace kingsandpigs.Scripts
         }
         public void MovementHandler(float dir)
         {
-            if (CurState is State.Hit or State.Dead or State.Attack) return;
+            if (CurState == State.Hit || CurState == State.Dead || CurState == State.Attack) return;
             SpriteAnchor.Scale = new Vector2(-dir, 1);
             Velocity.x = Mathf.Lerp(Velocity.x, dir * Speed, 0.2f);
         }

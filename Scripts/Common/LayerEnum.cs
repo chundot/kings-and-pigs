@@ -11,6 +11,7 @@
         ViewDetect,
         AtkRange,
         DeadBody,
-        Diamond
+        Item,
+        OtherItem,
     }
 }
