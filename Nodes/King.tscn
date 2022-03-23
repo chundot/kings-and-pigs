@@ -611,6 +611,7 @@ collision_mask = 3
 script = ExtResource( 11 )
 
 [node name="SpriteAnchor" type="Position2D" parent="."]
+scale = Vector2( -1, 1 )
 __meta__ = {
 "_edit_lock_": true
 }

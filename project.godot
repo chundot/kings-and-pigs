@@ -100,6 +100,7 @@ sayhi={
 2d_physics/layer_9="DeadBody"
 2d_physics/layer_10="Item"
 2d_physics/layer_11="OtherItem"
+2d_physics/layer_12="Door"
 
 [physics]
 

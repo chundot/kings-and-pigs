@@ -82,7 +82,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 61 )
 animation = "Idle"
-frame = 7
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true

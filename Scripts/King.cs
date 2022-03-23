@@ -181,14 +181,4 @@ public class King : BaseStatedBody<King.State>
             _ => NextState
         };
     }
-
-    public void OnBodyEntered(Node2D body)
-    {
-        if (body is Diamond d)
-        {
-            if (d.CurState is Diamond.State.Hit) return;
-            d.ToHit();
-            OnDiamondChanged(1);
-        }
-    }
 }

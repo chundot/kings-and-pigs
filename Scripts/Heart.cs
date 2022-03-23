@@ -1,10 +1,8 @@
-using System;
 using Godot;
 
-public class Diamond : RigidBody2D
+public class Heart : RigidBody2D
 {
-    private Vector2 Velocity = Vector2.Zero;
-    public State CurState = 0;
+    public bool Hit = false;
     private AnimatedSprite _sprite;
     public Vector2 Impulse;
     public override void _Ready()
@@ -15,17 +13,12 @@ public class Diamond : RigidBody2D
 
     public void ToHit()
     {
+        Hit = true;
         _sprite.Play("Hit");
     }
 
     public void OnAnimationFinished()
     {
         if (_sprite.Animation == "Hit") QueueFree();
-    }
-
-    public enum State
-    {
-        Idle = 0,
-        Hit
     }
 }

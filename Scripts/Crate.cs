@@ -28,18 +28,35 @@ public class Crate : RigidBody2D
         var parent = GetParent();
         for (var i = 0; i < 4; i++)
         {
-            GD.Print(i);
             var node = frag.Instance<CrateFrag>();
             node.GlobalPosition = GlobalPosition;
-            node.Set(i, Vector2.Right * dir * rnd.Next(10, 20));
+            node.Set(i, Vector2.Right * dir * rnd.Next(150, 240) + Vector2.Up * rnd.Next(80, 150));
             parent.AddChild(node);
-            node.ApplyCentralImpulse(Vector2.Right * dir * rnd.Next(10, 20));
         }
     }
 
     private void GenerateRndItems()
     {
+        var parent = GetParent();
+        var rnd = new Random();
+        var num = rnd.Next(1, 5);
         var diamond = GD.Load<PackedScene>("res://Nodes/Diamond.tscn");
+        for (int i = 0; i < num; i++)
+        {
+            var node = diamond.Instance<Diamond>();
+            node.GlobalPosition = GlobalPosition;
+            node.Impulse = Vector2.Right * dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 90);
+            parent.AddChild(node);
+        }
+        num = rnd.Next(0, 2);
+        if (num != 0)
+        {
+            var heart = GD.Load<PackedScene>("res://Nodes/Heart.tscn");
+            var node = heart.Instance<Heart>();
+            node.GlobalPosition = GlobalPosition;
+            node.Impulse = Vector2.Right * dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 80);
+            parent.AddChild(node);
+        }
     }
 
     public void OnAnimationFinished()
@@ -47,6 +64,7 @@ public class Crate : RigidBody2D
         if (_sprite.Animation == "Hit")
         {
             GenerateFragments();
+            GenerateRndItems();
             QueueFree();
         }
     }

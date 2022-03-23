@@ -36,6 +36,7 @@ animations = [ {
 extents = Vector2( 5, 3.5 )
 
 [node name="CrateFrag" type="RigidBody2D"]
+collision_layer = 1024
 physics_material_override = SubResource( 74 )
 gravity_scale = 3.0
 script = ExtResource( 2 )

@@ -68,7 +68,6 @@ namespace kingsandpigs.Scripts.Common
         {
             if (body is TileMap tileMap)
             {
-                GD.Print(body.GetType().Name);
             }
         }
         public virtual void OnHitBoxEnter(Area2D area)
@@ -87,6 +86,22 @@ namespace kingsandpigs.Scripts.Common
                     area.GetParent<Position2D>().GetParent<BaseBody>().Dlg.Display(DlgType.LoserIn);
                 }
                 else Dlg.Display(DlgType.WtfIn);
+            }
+        }
+
+        public virtual void OnBodyEntered(Node2D body)
+        {
+            if (body is Diamond d)
+            {
+                if (d.CurState is Diamond.State.Hit) return;
+                d.ToHit();
+                OnDiamondChanged(1);
+            }
+            else if (body is Heart h)
+            {
+                if (h.Hit || Health == MaxHealth) return;
+                h.ToHit();
+                OnHealthChange(Health + 1, Health);
             }
         }
 

@@ -4,26 +4,20 @@ namespace kingsandpigs.Scripts
 {
     public class DlgBox : AnimatedSprite
     {
-        private Timer _timer;
+        private float _time;
 
-        public override void _Ready()
+
+        public override void _PhysicsProcess(float delta)
         {
-            _timer = GetChild<Timer>(0);
+            if (_time < 0 && Animation.Contains("In")) Play(Animation.Replace("In", "Out"));
+            else _time -= delta;
         }
 
-        public void Display(DlgType type, float time = .8f)
+        public void Display(DlgType type, float time = 1f)
         {
             Visible = true;
             Play(type.ToString());
-            _timer.Start(time);
-        }
-
-        public void TimeOut()
-        {
-            if (Animation.Contains("In"))
-            {
-                Play(Animation.Replace("In", "Out"));
-            }
+            _time = time;
         }
 
         public void AnimationFinished()
