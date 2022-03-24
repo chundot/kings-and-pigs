@@ -64,7 +64,6 @@ animations = [ {
 extents = Vector2( 6, 5.5 )
 
 [node name="Heart" type="RigidBody2D"]
-position = Vector2( 222, 34 )
 z_index = 11
 collision_layer = 512
 collision_mask = 33
@@ -76,7 +75,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 82 )
 animation = "Idle"
-frame = 3
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

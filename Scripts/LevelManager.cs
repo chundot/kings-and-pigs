@@ -1,4 +1,5 @@
 using Godot;
+using kingsandpigs.Scripts.Common;
 using kingsandpigs.Scripts.UI;
 
 public class LevelManager : Node2D
@@ -15,6 +16,7 @@ public class LevelManager : Node2D
 
     public void GoNextLevel()
     {
+        GlobalVar.Diamond = _hud.DiamondNum;
         GetTree().ChangeScene($"res://Scene/Levels/{NextLevel}.tscn");
     }
 }

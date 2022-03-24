@@ -6,7 +6,6 @@ namespace kingsandpigs.Scripts
 {
     public class Pig : BaseStatedBody<Pig.State>
     {
-        protected new float AtkCD = 2f;
         public override void _Ready()
         {
             Speed = 160;
@@ -75,7 +74,7 @@ namespace kingsandpigs.Scripts
         {
             SpeedHandler(.05f);
             if (IsOnFloor())
-                return Health > 0 ? State.Hit : State.Dead;
+                return Health > 0 ? State.Idle : State.Dead;
             return CurState;
         }
 
@@ -129,9 +128,13 @@ namespace kingsandpigs.Scripts
             {
                 State.Attack => !IsOnFloor() ? State.Fall : State.Idle,
                 State.Ground => State.Idle,
-                State.Hit => Health > 0 ? State.Idle : State.Dead,
                 _ => NextState
             };
+            if (state is State.Dead)
+            {
+                OnDeath?.Invoke();
+                OnDeath = null;
+            }
         }
         #endregion
     }

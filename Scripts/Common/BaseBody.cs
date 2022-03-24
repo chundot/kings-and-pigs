@@ -5,23 +5,24 @@ namespace kingsandpigs.Scripts.Common
 {
     public class BaseBody : KinematicBody2D
     {
-        public int MaxHealth = 3;
+        [Export] public int MaxHealth = 3;
         public int Health = 3;
         public bool CanAttack = false;
         protected Vector2 Velocity = Vector2.Zero;
         protected int Gravity = 12;
         protected int MaxFallSpeed = 360;
-        protected int Speed = 120;
-        protected int JumpForce = 280;
+        [Export] protected int Speed = 120;
+        [Export] protected int JumpForce = 280;
         protected Position2D SpriteAnchor;
         protected AnimationPlayer Player;
         public DlgBox Dlg;
-        protected float InvincibleTimer = 0.4f;
-        protected float AtkCD = .4f;
+        protected float InvincibleTimer = .4f;
+        protected float AtkCD = 1f;
         protected Node2D Info;
         public event Action<int, int> OnHealthChange;
         public Action<int> OnDiamondChanged;
         public Action OnDeath;
+        protected BaseBody KilledBy;
 
         public override void _Ready()
         {
@@ -31,6 +32,12 @@ namespace kingsandpigs.Scripts.Common
             Player = GetChild<AnimationPlayer>(1);
             Info = GetChild<Node2D>(2);
             OnHealthChange += (newVal, oldVal) => Health = newVal;
+            OnDeath += () =>
+            {
+                if (KilledBy != null) KilledBy.Dlg.Display(DlgType.LoserIn);
+                this.SetLayerBit(LayerEnum.Rb);
+                this.SetLayerBit(LayerEnum.DeadBody);
+            };
         }
 
         public override void _PhysicsProcess(float delta)
@@ -77,14 +84,9 @@ namespace kingsandpigs.Scripts.Common
             {
                 InvincibleTimer = 0.3f;
                 HealthChange(1);
-                Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed + Vector2.Up * JumpForce / 2;
+                Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed * 1.5f + Vector2.Up * JumpForce / 3f;
                 if (Health == 0)
-                {
-                    OnDeath?.Invoke();
-                    OnDeath = null;
-                    Dlg.Display(DlgType.DeadIn);
-                    area.GetParent<Position2D>().GetParent<BaseBody>().Dlg.Display(DlgType.LoserIn);
-                }
+                    KilledBy = area.GetParent<Position2D>().GetParent<BaseBody>();
                 else Dlg.Display(DlgType.WtfIn);
             }
         }

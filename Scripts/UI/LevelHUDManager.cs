@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using kingsandpigs.Scripts.Common;
 
 namespace kingsandpigs.Scripts.UI
 {
@@ -8,7 +9,7 @@ namespace kingsandpigs.Scripts.UI
         private TextureRect _liveBar;
         private Label _diamondLabel;
         private readonly List<SmallHeart> _hearts = new List<SmallHeart>();
-        private int _diamondNum = 0;
+        public int DiamondNum = 0;
 
         public override void _Ready()
         {
@@ -16,6 +17,7 @@ namespace kingsandpigs.Scripts.UI
             _liveBar = GetChild<TextureRect>(0);
             _diamondLabel = GetChild<Label>(1);
             _hearts.ForEach(h => _liveBar.AddChild(h));
+            DiamondChange(GlobalVar.Diamond);
         }
 
 
@@ -38,8 +40,8 @@ namespace kingsandpigs.Scripts.UI
 
         public void DiamondChange(int num)
         {
-            _diamondNum += num;
-            _diamondLabel.Text = _diamondNum.ToString();
+            DiamondNum += num;
+            _diamondLabel.Text = DiamondNum.ToString();
         }
     }
 }

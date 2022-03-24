@@ -74,6 +74,7 @@ public class King : BaseStatedBody<King.State>
     {
         MovementHandler();
         SpeedHandler();
+        if (IsOnFloor()) return State.Ground;
         if (AttackHandler()) return State.Attack;
         if (Velocity.y > 0) return State.Fall;
         return CurState;

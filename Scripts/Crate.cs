@@ -11,11 +11,6 @@ public class Crate : RigidBody2D
         _sprite = GetChild<AnimatedSprite>(0);
     }
 
-    public override void _PhysicsProcess(float delta)
-    {
-
-    }
-
     public void ToHit()
     {
         _sprite.Play("Hit");
@@ -39,7 +34,7 @@ public class Crate : RigidBody2D
     {
         var parent = GetParent();
         var rnd = new Random();
-        var num = rnd.Next(1, 5);
+        var num = rnd.Next(0, 3);
         var diamond = GD.Load<PackedScene>("res://Nodes/Diamond.tscn");
         for (int i = 0; i < num; i++)
         {

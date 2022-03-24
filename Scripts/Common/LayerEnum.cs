@@ -13,5 +13,7 @@
         DeadBody,
         Item,
         OtherItem,
+        Door,
+        PlayerDetect
     }
 }

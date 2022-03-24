@@ -14,6 +14,11 @@ config/name="kings-and-pigs"
 run/main_scene="res://Scene/Levels/Level1.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/height=640
+window/size/resizable=false
+
 [importer_defaults]
 
 texture={
@@ -106,6 +111,7 @@ enter_door={
 2d_physics/layer_10="Item"
 2d_physics/layer_11="OtherItem"
 2d_physics/layer_12="Door"
+2d_physics/layer_13="PlayerDetect"
 
 [physics]
 
