@@ -10,8 +10,9 @@ public class LevelManager : Node2D
     public override void _Ready()
     {
         _hud = GetNode<LevelHUDManager>("LevelHUD");
+        _hud.OnNextLevel += GoNextLevel;
         _player = GetNode<PlayerController>("Player");
-        _player.UpdateEvent(_hud.HealthChange, _hud.DiamondChange, GoNextLevel);
+        _player.UpdateEvent(_hud.HealthChange, _hud.DiamondChange, _hud.TransIn);
     }
 
     public void GoNextLevel()

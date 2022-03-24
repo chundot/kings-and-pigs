@@ -1,0 +1,146 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets/15-Font/BMFont.fnt" type="BitmapFont" id=1]
+[ext_resource path="res://Scripts/UI/LevelHUDManager.cs" type="Script" id=2]
+[ext_resource path="res://Assets/12-Live and Coins/Small Diamond (18x14).png" type="Texture" id=3]
+[ext_resource path="res://Assets/12-Live and Coins/Live Bar.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=64]
+atlas = ExtResource( 3 )
+region = Rect2( 18, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=65]
+atlas = ExtResource( 3 )
+region = Rect2( 36, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=66]
+atlas = ExtResource( 3 )
+region = Rect2( 54, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=67]
+atlas = ExtResource( 3 )
+region = Rect2( 72, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=68]
+atlas = ExtResource( 3 )
+region = Rect2( 90, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=69]
+atlas = ExtResource( 3 )
+region = Rect2( 108, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=70]
+atlas = ExtResource( 3 )
+region = Rect2( 126, 0, 18, 14 )
+
+[sub_resource type="SpriteFrames" id=71]
+animations = [ {
+"frames": [ SubResource( 63 ), SubResource( 64 ), SubResource( 65 ), SubResource( 66 ), SubResource( 67 ), SubResource( 68 ), SubResource( 69 ), SubResource( 70 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="Animation" id=84]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 172, -172 ) ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "TriIn"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 624, -283 ), Vector2( 64, -283 ) ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "TriOut"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 172, -172 ), Vector2( -400, -172 ) ]
+}
+
+[node name="LevelHUD" type="CanvasLayer"]
+scale = Vector2( 3, 3 )
+transform = Transform2D( 3, 0, 0, 3, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="LiveBar" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiamonLabel" type="Label" parent="."]
+margin_left = 34.0
+margin_top = 27.0
+margin_right = 72.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
+position = Vector2( -9, 5 )
+frames = SubResource( 71 )
+frame = 1
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Trans" type="AnimationPlayer" parent="."]
+pause_mode = 2
+root_node = NodePath("ColorRect")
+anims/RESET = SubResource( 84 )
+anims/TriIn = SubResource( 82 )
+anims/TriOut = SubResource( 83 )
+
+[node name="ColorRect" type="ColorRect" parent="Trans"]
+margin_left = 172.0
+margin_top = -172.0
+margin_right = 728.0
+margin_bottom = 228.0
+rect_rotation = 45.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="animation_finished" from="Trans" to="." method="OnTransitionStop"]

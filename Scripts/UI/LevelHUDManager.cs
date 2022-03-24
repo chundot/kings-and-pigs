@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 using kingsandpigs.Scripts.Common;
@@ -10,14 +11,18 @@ namespace kingsandpigs.Scripts.UI
         private Label _diamondLabel;
         private readonly List<SmallHeart> _hearts = new List<SmallHeart>();
         public int DiamondNum = 0;
-
+        public AnimationPlayer _transitionPlayer;
+        public Action OnNextLevel;
         public override void _Ready()
         {
+            GetTree().Paused = true;
             InitHeart();
             _liveBar = GetChild<TextureRect>(0);
             _diamondLabel = GetChild<Label>(1);
+            _transitionPlayer = GetChild<AnimationPlayer>(2);
             _hearts.ForEach(h => _liveBar.AddChild(h));
             DiamondChange(GlobalVar.Diamond);
+            TransOut();
         }
 
 
@@ -42,6 +47,24 @@ namespace kingsandpigs.Scripts.UI
         {
             DiamondNum += num;
             _diamondLabel.Text = DiamondNum.ToString();
+        }
+
+        public void TransIn()
+        {
+            _transitionPlayer.Play("TriIn");
+        }
+
+        public void TransOut()
+        {
+            _transitionPlayer.Play("TriOut");
+        }
+
+        public void OnTransitionStop(string name)
+        {
+            if (name.Contains("Out"))
+                GetTree().Paused = false;
+            else
+                OnNextLevel?.Invoke();
         }
     }
 }
