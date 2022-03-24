@@ -16,6 +16,11 @@ animations = [ {
 "name": "3",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "1",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": false,
 "name": "0",
@@ -25,18 +30,15 @@ animations = [ {
 "loop": false,
 "name": "2",
 "speed": 10.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "1",
-"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=73]
 extents = Vector2( 5, 3.5 )
 
 [node name="CrateFrag" type="RigidBody2D"]
+z_index = 9
 collision_layer = 1024
+mode = 2
 physics_material_override = SubResource( 74 )
 gravity_scale = 3.0
 script = ExtResource( 2 )

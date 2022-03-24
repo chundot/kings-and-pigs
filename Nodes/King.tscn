@@ -632,6 +632,7 @@ collision_mask = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
 polygon = PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 69 )

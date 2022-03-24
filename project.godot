@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="kings-and-pigs"
-run/main_scene="res://Scene/Level.tscn"
+run/main_scene="res://Scene/Levels/Level1.tscn"
 config/icon="res://icon.png"
 
 [importer_defaults]
@@ -84,6 +84,11 @@ recover={
 sayhi={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+enter_door={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777232,"unicode":0,"echo":false,"script":null)
  ]
 }
 

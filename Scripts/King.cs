@@ -6,6 +6,7 @@ using kingsandpigs.Scripts.Common;
 
 public class King : BaseStatedBody<King.State>
 {
+    public Action OnNextLevel;
     public override void _Ready()
     {
         base._Ready();
@@ -178,7 +179,13 @@ public class King : BaseStatedBody<King.State>
             State.Attack => !IsOnFloor() ? State.Fall : State.Idle,
             State.Ground => State.Idle,
             State.Hit => Health > 0 ? State.Idle : State.Dead,
+            State.DoorOut => State.Idle,
             _ => NextState
         };
+        if (state is State.DoorIn)
+        {
+            Visible = false;
+            OnNextLevel?.Invoke();
+        }
     }
 }

@@ -9,7 +9,7 @@ a platformer game based on godot engine mono.
 - [ ] level design;
   - [x] tilemap;
   - [x] one-way through platform;
-  - [x] at least 5 levels.
+  - [ ] at least 5 levels.
 - [ ] enemy ai;
 - [ ] player controller optimization;
 - [x] collectable item and ui;

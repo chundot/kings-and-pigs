@@ -6,7 +6,7 @@ namespace kingsandpigs.Scripts.Common
     public class BaseStatedBody<TEnum> : BaseBody where TEnum : Enum
     {
         protected TEnum CurState;
-        protected TEnum NextState = default;
+        public TEnum NextState = default;
 
         protected virtual TEnum TransTo(TEnum nextState)
         {
