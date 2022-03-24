@@ -6,9 +6,11 @@ public class Crate : RigidBody2D
     private AnimatedSprite _sprite;
     private Vector2 _velocity = Vector2.Zero;
     private int dir = 0;
+    [Export] public bool FaceRight = false;
     public override void _Ready()
     {
         _sprite = GetChild<AnimatedSprite>(0);
+        _sprite.FlipH = FaceRight;
     }
 
     public void ToHit()
