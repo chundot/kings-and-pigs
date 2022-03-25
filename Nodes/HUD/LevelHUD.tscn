@@ -1,9 +1,12 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/15-Font/BMFont.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://Scripts/UI/LevelHUDManager.cs" type="Script" id=2]
 [ext_resource path="res://Assets/12-Live and Coins/Small Diamond (18x14).png" type="Texture" id=3]
 [ext_resource path="res://Assets/12-Live and Coins/Live Bar.png" type="Texture" id=4]
+[ext_resource path="res://Assets/15-Font/BasicPupWhite.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://Nodes/HUD/Banner0.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resource/Btn0.tres" type="StyleBox" id=7]
 
 [sub_resource type="AtlasTexture" id=63]
 atlas = ExtResource( 3 )
@@ -92,7 +95,67 @@ tracks/0/keys = {
 "values": [ Vector2( 172, -172 ), Vector2( -400, -172 ) ]
 }
 
+[sub_resource type="Animation" id=85]
+resource_name = "In"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pause/Position2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=86]
+resource_name = "Out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pause/Position2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=87]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pause/Position2D/PauseMenu:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pause/Position2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+
 [node name="LevelHUD" type="CanvasLayer"]
+pause_mode = 2
 scale = Vector2( 3, 3 )
 transform = Transform2D( 3, 0, 0, 3, 0, 0 )
 script = ExtResource( 2 )
@@ -119,7 +182,7 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 1
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -143,4 +206,100 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Pause" type="AnimationPlayer" parent="."]
+anims/In = SubResource( 85 )
+anims/Out = SubResource( 86 )
+anims/RESET = SubResource( 87 )
+
+[node name="Position2D" type="Position2D" parent="Pause"]
+position = Vector2( 172, 96 )
+scale = Vector2( 1e-05, 1e-05 )
+
+[node name="PauseMenu" type="Node2D" parent="Pause/Position2D"]
+position = Vector2( -172, -96 )
+
+[node name="ColorRect" type="ColorRect" parent="Pause/Position2D/PauseMenu"]
+margin_right = 342.0
+margin_bottom = 214.0
+color = Color( 0.247059, 0.219608, 0.317647, 0.862745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Banner" parent="Pause/Position2D/PauseMenu" instance=ExtResource( 6 )]
+margin_left = 107.0
+margin_top = 20.0
+margin_right = 235.0
+margin_bottom = 50.0
+
+[node name="Pause" type="Label" parent="Pause/Position2D/PauseMenu/Banner"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -17.75
+margin_top = -4.75
+margin_right = 22.25
+margin_bottom = 11.25
+custom_fonts/font = ExtResource( 5 )
+text = "PAUSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause/Position2D/PauseMenu"]
+margin_left = 140.667
+margin_top = 69.3333
+margin_right = 200.667
+margin_bottom = 173.333
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
+margin_right = 60.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+text = "LEVEL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
+margin_top = 36.0
+margin_right = 60.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+text = "RESUME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
+margin_top = 72.0
+margin_right = 60.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+text = "MENU"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="animation_finished" from="Trans" to="." method="OnTransitionStop"]
+[connection signal="animation_finished" from="Pause" to="." method="OnMenuOut"]
+[connection signal="pressed" from="Pause/Position2D/PauseMenu/VBoxContainer/Resume" to="." method="Pause"]

@@ -11,7 +11,8 @@ namespace kingsandpigs.Scripts.UI
         private Label _diamondLabel;
         private readonly List<SmallHeart> _hearts = new List<SmallHeart>();
         public int DiamondNum = 0;
-        public AnimationPlayer _transitionPlayer;
+        private AnimationPlayer _transitionPlayer;
+        private AnimationPlayer _menu;
         public Action OnNextLevel;
         public override void _Ready()
         {
@@ -20,11 +21,16 @@ namespace kingsandpigs.Scripts.UI
             _liveBar = GetChild<TextureRect>(0);
             _diamondLabel = GetChild<Label>(1);
             _transitionPlayer = GetChild<AnimationPlayer>(2);
+            _menu = GetChild<AnimationPlayer>(3);
             _hearts.ForEach(h => _liveBar.AddChild(h));
             DiamondChange(GlobalVar.Diamond);
             TransOut();
         }
 
+        public override void _PhysicsProcess(float delta)
+        {
+            if (Input.IsActionJustPressed("pause")) Pause();
+        }
 
         private void InitHeart()
         {
@@ -59,12 +65,30 @@ namespace kingsandpigs.Scripts.UI
             _transitionPlayer.Play("TriOut");
         }
 
+        public void Pause()
+        {
+            var status = GetTree().Paused;
+            if (status)
+                _menu.Play("Out");
+            else
+            {
+                _menu.Play("In");
+                GetTree().Paused = !status;
+            }
+        }
+
         public void OnTransitionStop(string name)
         {
             if (name.Contains("Out"))
                 GetTree().Paused = false;
             else
                 OnNextLevel?.Invoke();
+        }
+
+        public void OnMenuOut(string name)
+        {
+            if (name is "Out")
+                GetTree().Paused = false;
         }
     }
 }

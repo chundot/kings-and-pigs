@@ -16,6 +16,7 @@ public class LevelManager : Node2D
         _player.UpdateEvent(_hud.HealthChange, _hud.DiamondChange, _hud.TransIn);
     }
 
+
     public void GoNextLevel()
     {
         GlobalVar.Diamond = _hud.DiamondNum;
