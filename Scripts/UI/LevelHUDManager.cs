@@ -16,7 +16,6 @@ namespace kingsandpigs.Scripts.UI
         public Action OnNextLevel;
         public override void _Ready()
         {
-            GetTree().Paused = true;
             InitHeart();
             _liveBar = GetChild<TextureRect>(0);
             _diamondLabel = GetChild<Label>(1);
@@ -79,9 +78,7 @@ namespace kingsandpigs.Scripts.UI
 
         public void OnTransitionStop(string name)
         {
-            if (name.Contains("Out"))
-                GetTree().Paused = false;
-            else
+            if (name.Contains("In"))
                 OnNextLevel?.Invoke();
         }
 

@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Nodes/HUD/Panel0.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/15-Font/BasicPupBlack.fnt" type="BitmapFont" id=2]
-[ext_resource path="res://Scripts/Tip.cs" type="Script" id=3]
+[ext_resource path="res://Assets/16-UI/X.png" type="Texture" id=3]
+[ext_resource path="res://Assets/08-Box/Idle.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Tip.cs" type="Script" id=5]
+[ext_resource path="res://Assets/03-Pig/Idle (34x28).png" type="Texture" id=6]
+[ext_resource path="res://Assets/09-Bomb/Bomb Off.png" type="Texture" id=7]
 
-[sub_resource type="Animation" id=83]
+[sub_resource type="Animation" id=82]
 resource_name = "In"
 length = 0.1
 tracks/0/type = "value"
@@ -20,7 +24,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=84]
+[sub_resource type="Animation" id=83]
 resource_name = "Out"
 length = 0.1
 tracks/0/type = "value"
@@ -36,7 +40,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1 ) ]
 }
 
-[sub_resource type="Animation" id=85]
+[sub_resource type="Animation" id=84]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Tip/TipArea/Position2D:scale")
@@ -50,40 +54,50 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1e-05, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Tip/TipArea/Position2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1 ) ]
+}
 
-[sub_resource type="RectangleShape2D" id=82]
-extents = Vector2( 16, 10 )
+[sub_resource type="RectangleShape2D" id=85]
+extents = Vector2( 16, 16 )
 
 [node name="Tip" type="AnimationPlayer"]
-anims/In = SubResource( 83 )
-anims/Out = SubResource( 84 )
-anims/RESET = SubResource( 85 )
-script = ExtResource( 3 )
+anims/In = SubResource( 82 )
+anims/Out = SubResource( 83 )
+anims/RESET = SubResource( 84 )
+script = ExtResource( 5 )
 
 [node name="TipArea" type="Area2D" parent="."]
+position = Vector2( 419, 150 )
 z_index = 10
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TipArea"]
-shape = SubResource( 82 )
+position = Vector2( -14, -6 )
+shape = SubResource( 85 )
 
 [node name="Position2D" type="Position2D" parent="TipArea"]
-position = Vector2( 24, -71 )
-scale = Vector2( 1e-05, 1 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( -23, 49 )
 
 [node name="Panel0" parent="TipArea/Position2D" instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -24.5
-margin_right = 53.5
-margin_bottom = 24.5
+margin_left = -53.0
+margin_top = -24.0
+margin_right = 39.0
+margin_bottom = 25.0
 
 [node name="Label" type="Label" parent="TipArea/Position2D/Panel0"]
 anchor_right = 1.0
@@ -93,11 +107,28 @@ margin_top = 4.0
 margin_right = -4.0
 margin_bottom = -4.0
 custom_fonts/font = ExtResource( 2 )
-text = "move:
-jump:"
+text = "Attack:
+Hit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="TipArea/Position2D/Panel0/Label"]
+position = Vector2( 57, 8 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="TipArea/Position2D/Panel0/Label"]
+position = Vector2( 30, 26 )
+texture = ExtResource( 4 )
+
+[node name="Sprite4" type="Sprite" parent="TipArea/Position2D/Panel0/Label"]
+position = Vector2( 71, 23 )
+texture = ExtResource( 7 )
+
+[node name="Sprite2" type="Sprite" parent="TipArea/Position2D/Panel0/Label"]
+position = Vector2( 49, 20 )
+texture = ExtResource( 6 )
+hframes = 11
 
 [connection signal="area_entered" from="TipArea" to="." method="OnAreaEntered"]
 [connection signal="area_exited" from="TipArea" to="." method="OnAreaExited"]
