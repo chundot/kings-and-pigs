@@ -84,7 +84,7 @@ namespace kingsandpigs.Scripts.Common
             {
                 InvincibleTimer = 0.3f;
                 HealthChange(1);
-                Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed * 1.5f + Vector2.Up * JumpForce / 3f;
+                Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed * 1.5f + Vector2.Up * JumpForce / 2.5f;
                 if (Health == 0)
                     KilledBy = area.GetParent<Position2D>().GetParent<BaseBody>();
                 else Dlg.Display(DlgType.WtfIn);

@@ -18,6 +18,7 @@ public class PlayerController : Node2D
     {
         if (CanEnterDoor && Input.IsActionJustPressed("enter_door") && _body is King king)
             king.NextState = King.State.DoorIn;
+        if (Input.IsActionJustPressed("restart")) GetTree().ReloadCurrentScene();
     }
     public void UpdateEvent(Action<int, int> onHealthChange, Action<int> onDiamondChange, Action onNextLevel)
     {

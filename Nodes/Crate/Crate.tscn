@@ -27,6 +27,7 @@ extents = Vector2( 9.5, 8 )
 extents = Vector2( 7.5, 7.5 )
 
 [node name="Crate" type="RigidBody2D"]
+z_index = 5
 collision_layer = 16
 collision_mask = 17
 mode = 2

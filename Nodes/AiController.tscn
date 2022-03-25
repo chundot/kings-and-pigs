@@ -12,7 +12,6 @@ extents = Vector2( 92.5, 13.5 )
 script = ExtResource( 2 )
 
 [node name="Detect" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -21,6 +20,7 @@ position = Vector2( -5.5, -4.5 )
 shape = SubResource( 1 )
 
 [node name="View" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4096
 

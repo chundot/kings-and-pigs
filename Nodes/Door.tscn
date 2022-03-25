@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Door.cs" type="Script" id=1]
 [ext_resource path="res://Assets/11-Door/Opening (46x56).png" type="Texture" id=2]
 [ext_resource path="res://Assets/11-Door/Closiong (46x56).png" type="Texture" id=3]
 [ext_resource path="res://Assets/11-Door/Idle.png" type="Texture" id=4]
+[ext_resource path="res://Assets/16-UI/UpArrow.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=83]
 atlas = ExtResource( 2 )
@@ -65,6 +66,12 @@ frames = SubResource( 82 )
 animation = "Idle"
 playing = true
 script = ExtResource( 1 )
+
+[node name="Tip" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -38 )
+z_index = 25
+texture = ExtResource( 5 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2048

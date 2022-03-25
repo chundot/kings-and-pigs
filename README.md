@@ -11,6 +11,11 @@ a platformer game based on godot engine mono.
   - [x] one-way through platform;
   - [ ] at least 5 levels.
 - [ ] enemy ai;
+  - [x] normal pig;
+  - [ ] crate pig;
+  - [ ] pig in crate;
+  - [ ] bomb pig;
+  - [ ] pig with march.
 - [ ] player controller optimization;
 - [x] collectable item and ui;
   - [x] heart;

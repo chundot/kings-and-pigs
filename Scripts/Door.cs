@@ -4,10 +4,13 @@ using Godot;
 public class Door : AnimatedSprite
 {
     [Export] public bool IsEntry;
+    public string NextLevel;
     public bool IsOpen;
     private PlayerController _player;
+    private Sprite _tip;
     public override void _Ready()
     {
+        _tip = GetChild<Sprite>(0);
         if (IsEntry) Play("Opening");
     }
 
@@ -21,6 +24,7 @@ public class Door : AnimatedSprite
         {
             if (_player != null) _player.CanEnterDoor = true;
             IsOpen = true;
+            _tip.Visible = true;
         }
     }
 
@@ -36,5 +40,6 @@ public class Door : AnimatedSprite
         if (_player is null) _player = area.GetParent().GetParent<PlayerController>();
         _player.CanEnterDoor = false;
         Play("Closing");
+        _tip.Visible = false;
     }
 }
