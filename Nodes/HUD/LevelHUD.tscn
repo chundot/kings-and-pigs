@@ -182,7 +182,7 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 4
+frame = 6
 playing = true
 __meta__ = {
 "_edit_lock_": true

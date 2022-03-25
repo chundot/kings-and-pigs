@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Nodes/HUD/Panel0.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/15-Font/BasicPupBlack.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://Scripts/Tip.cs" type="Script" id=3]
+
+[sub_resource type="Animation" id=83]
+resource_name = "In"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tip/TipArea/Position2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "Out"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tip/TipArea/Position2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1 ) ]
+}
+
+[sub_resource type="Animation" id=85]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Tip/TipArea/Position2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=82]
+extents = Vector2( 16, 10 )
+
+[node name="Tip" type="AnimationPlayer"]
+anims/In = SubResource( 83 )
+anims/Out = SubResource( 84 )
+anims/RESET = SubResource( 85 )
+script = ExtResource( 3 )
+
+[node name="TipArea" type="Area2D" parent="."]
+z_index = 10
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TipArea"]
+shape = SubResource( 82 )
+
+[node name="Position2D" type="Position2D" parent="TipArea"]
+position = Vector2( 24, -71 )
+scale = Vector2( 1e-05, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Panel0" parent="TipArea/Position2D" instance=ExtResource( 1 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -24.5
+margin_right = 53.5
+margin_bottom = 24.5
+
+[node name="Label" type="Label" parent="TipArea/Position2D/Panel0"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
+text = "move:
+jump:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="area_entered" from="TipArea" to="." method="OnAreaEntered"]
+[connection signal="area_exited" from="TipArea" to="." method="OnAreaExited"]
