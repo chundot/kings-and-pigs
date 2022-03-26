@@ -60,7 +60,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 172, -172 ) ]
+"values": [ Vector2( 68, -282 ) ]
 }
 
 [sub_resource type="Animation" id=82]
@@ -76,7 +76,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 624, -283 ), Vector2( 64, -283 ) ]
+"values": [ Vector2( 628, -282 ), Vector2( 68, -282 ) ]
 }
 
 [sub_resource type="Animation" id=83]
@@ -92,7 +92,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 172, -172 ), Vector2( -400, -172 ) ]
+"values": [ Vector2( 68, -282 ), Vector2( -498, -282 ) ]
 }
 
 [sub_resource type="Animation" id=85]
@@ -182,7 +182,7 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 6
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -196,10 +196,10 @@ anims/TriIn = SubResource( 82 )
 anims/TriOut = SubResource( 83 )
 
 [node name="ColorRect" type="ColorRect" parent="Trans"]
-margin_left = 172.0
-margin_top = -172.0
-margin_right = 728.0
-margin_bottom = 228.0
+margin_left = 68.0
+margin_top = -282.0
+margin_right = 767.0
+margin_bottom = 116.0
 rect_rotation = 45.0
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -242,7 +242,7 @@ margin_top = -4.75
 margin_right = 22.25
 margin_bottom = 11.25
 custom_fonts/font = ExtResource( 5 )
-text = "PAUSE"
+text = "Pause"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -257,7 +257,7 @@ __meta__ = {
 }
 
 [node name="Level" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
-margin_right = 60.0
+margin_right = 61.0
 margin_bottom = 32.0
 custom_fonts/font = ExtResource( 5 )
 custom_styles/hover = ExtResource( 7 )
@@ -265,14 +265,14 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 7 )
-text = "LEVEL"
+text = "Level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Resume" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
 margin_top = 36.0
-margin_right = 60.0
+margin_right = 61.0
 margin_bottom = 68.0
 custom_fonts/font = ExtResource( 5 )
 custom_styles/hover = ExtResource( 7 )
@@ -280,14 +280,14 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 7 )
-text = "RESUME"
+text = "Resume"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Menu" type="Button" parent="Pause/Position2D/PauseMenu/VBoxContainer"]
 margin_top = 72.0
-margin_right = 60.0
+margin_right = 61.0
 margin_bottom = 104.0
 custom_fonts/font = ExtResource( 5 )
 custom_styles/hover = ExtResource( 7 )
@@ -295,7 +295,7 @@ custom_styles/pressed = ExtResource( 7 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 7 )
 custom_styles/normal = ExtResource( 7 )
-text = "MENU"
+text = "Menu"
 __meta__ = {
 "_edit_use_anchors_": false
 }

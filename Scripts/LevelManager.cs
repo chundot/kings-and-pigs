@@ -20,6 +20,8 @@ public class LevelManager : Node2D
     public void GoNextLevel()
     {
         GlobalVar.Diamond = _hud.DiamondNum;
-        GetTree().ChangeScene($"res://Scene/Levels/{NextLevel}.tscn");
+        if (NextLevel.Contains("Level"))
+            GetTree().ChangeScene($"res://Scene/Levels/{NextLevel}.tscn");
+        else GetTree().ChangeScene($"res://Scene/{NextLevel}.tscn");
     }
 }

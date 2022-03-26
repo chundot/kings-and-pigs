@@ -88,6 +88,7 @@ shape = SubResource( 85 )
 
 [node name="Position2D" type="Position2D" parent="TipArea"]
 position = Vector2( -23, 49 )
+scale = Vector2( 1e-05, 1 )
 
 [node name="Panel0" parent="TipArea/Position2D" instance=ExtResource( 1 )]
 anchor_left = 0.5

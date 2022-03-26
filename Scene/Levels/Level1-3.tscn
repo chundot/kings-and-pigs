@@ -593,7 +593,7 @@ points = PoolVector2Array( 32, 9.98286, 0, 9.98286, 0, 0, 32, 0 )
 
 [node name="Level1-3" type="Node2D"]
 script = ExtResource( 4 )
-NextLevel = "Level1-1"
+NextLevel = "FinMenu"
 
 [node name="Tile" type="Node" parent="."]
 
@@ -653,6 +653,5 @@ position = Vector2( 399, 276 )
 
 [node name="Position2D" parent="Tip/TipArea" index="1"]
 position = Vector2( -9, -82 )
-scale = Vector2( 1e-05, 1 )
 
 [editable path="Tip"]
