@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using kingsandpigs.Scripts.Common;
 
 public class KingController : PlayerController<King>
 {
