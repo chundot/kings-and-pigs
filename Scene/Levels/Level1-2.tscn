@@ -684,7 +684,7 @@ z_index = 2
 tile_set = SubResource( 72 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 393220, 0, 0, 393224, 0, 0, 393228, 0, 0 )
+tile_data = PoolIntArray( 196612, 2, 0, 262148, 2, 196608, 393220, 0, 0, 393224, 0, 0, 393228, 0, 0, 393231, 2, 65536, 458767, 2, 196608 )
 
 [node name="PlatformCollision" type="StaticBody2D" parent="Tile"]
 

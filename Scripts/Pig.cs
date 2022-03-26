@@ -9,6 +9,7 @@ namespace kingsandpigs.Scripts
         public override void _Ready()
         {
             Speed = 160;
+            JumpForce = 200;
             base._Ready();
             OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
             TransTo(State.Idle);
@@ -60,7 +61,8 @@ namespace kingsandpigs.Scripts
 
         private State Fall()
         {
-            SpeedHandler();
+            SpeedHandler(.04f);
+            if (IsOnFloor()) return State.Ground;
             return CurState;
         }
 
@@ -87,7 +89,8 @@ namespace kingsandpigs.Scripts
 
         private State Jump()
         {
-            SpeedHandler();
+            SpeedHandler(.04f);
+            if (Velocity.y > 0) return State.Fall;
             return CurState;
         }
 
@@ -105,6 +108,12 @@ namespace kingsandpigs.Scripts
             if (CurState == State.Hit || CurState == State.Dead || CurState == State.Attack) return;
             SpriteAnchor.Scale = new Vector2(-dir, 1);
             Velocity.x = Mathf.Lerp(Velocity.x, dir * Speed, 0.2f);
+        }
+
+        public void JumpHandler()
+        {
+            Velocity.y = -JumpForce;
+            NextState = State.Jump;
         }
 
         public enum State

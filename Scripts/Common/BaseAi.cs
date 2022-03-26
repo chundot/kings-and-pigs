@@ -5,6 +5,7 @@ namespace kingsandpigs.Scripts.Common
 {
     public class BaseAI<TBody, TState> : Node2D where TBody : BaseBody where TState : Enum
     {
+        protected RayCast2D RayCast;
         protected TBody Body;
         protected TState CurState = default;
         protected TState NextState = default;
@@ -19,6 +20,7 @@ namespace kingsandpigs.Scripts.Common
                 QueueFree();
                 IsDead = true;
             };
+            RayCast = GetChild<RayCast2D>(0);
         }
         public override void _PhysicsProcess(float delta)
         {

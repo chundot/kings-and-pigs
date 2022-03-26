@@ -43,6 +43,8 @@ namespace kingsandpigs.Scripts
             if (_target is null) return State.Idle;
             var dir = GlobalPosition.x > _target.GlobalPosition.x ? -1 : 1;
             Body.MovementHandler(dir);
+            if (Body.IsOnFloor())
+                if (!RayCast.IsColliding()) Body.JumpHandler();
             return CurState;
         }
         private State TryAttack()
