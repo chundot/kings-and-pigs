@@ -5,7 +5,8 @@ a platformer game based on godot engine mono.
 - [ ] game ui;
   - [x] main menu;
   - [ ] select level;
-  - [x] level finished.
+  - [x] level finished;
+  - [ ] death menu;
   - [x] pause menu.
 - [ ] level design;
   - [x] tilemap;
@@ -18,6 +19,9 @@ a platformer game based on godot engine mono.
   - [ ] bomb pig;
   - [ ] pig with march.
 - [ ] player controller optimization;
+  - [x] responsive jump before touching ground;
+  - [x] responsive jump when falling in a short time;
+  - [ ] different height by when jump button released.
 - [x] collectable item and ui;
   - [x] heart;
   - [x] diamond.

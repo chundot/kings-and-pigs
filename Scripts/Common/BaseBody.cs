@@ -18,6 +18,7 @@ namespace kingsandpigs.Scripts.Common
         public DlgBox Dlg;
         protected float InvincibleTimer = .4f;
         protected float AtkCD = 1f;
+        protected float FallTimer = .1f;
         protected Node2D Info;
         public event Action<int, int> OnHealthChange;
         public Action<int> OnDiamondChanged;
@@ -46,6 +47,9 @@ namespace kingsandpigs.Scripts.Common
             GravityHandler();
             Velocity = MoveAndSlide(Velocity, Vector2.Up);
             InvincibleTimer = InvincibleTimer < -.1f ? InvincibleTimer : InvincibleTimer - delta;
+            FallTimer = Velocity.y > 0 ?
+                        FallTimer > 0 ? FallTimer - delta : FallTimer
+                        : .1f;
         }
 
         protected virtual void StateUpdate(float delta)

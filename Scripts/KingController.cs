@@ -17,12 +17,21 @@ public class KingController : PlayerController<King>
         base._PhysicsProcess(delta);
         if (CanEnterDoor && Input.IsActionJustPressed("enter_door"))
             Body.NextState = King.State.DoorIn;
+        // Movement
+        var dir = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+        Body.MovementHandler(dir);
+        // Jump
+        if (Input.IsActionJustPressed("jump")) JumpAction = .06f;
+        if (JumpAction > 0)
+        {
+            if (Body.JumpHandler()) JumpAction = 0;
+            JumpAction -= delta;
+        }
     }
     public void UpdateEvent(Action<int, int> onHealthChange, Action<int> onDiamondChange, Action onNextLevel)
     {
         Body.OnHealthChange += onHealthChange;
         Body.OnDiamondChanged += onDiamondChange;
-        if (Body is King king)
-            king.OnNextLevel += onNextLevel;
+        Body.OnNextLevel += onNextLevel;
     }
 }

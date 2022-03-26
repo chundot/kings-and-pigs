@@ -47,22 +47,17 @@ public class King : BaseStatedBody<King.State>
     #region STATEFUNC
     private State Idle()
     {
-        MovementHandler();
         SpeedHandler();
-        if (JumpHandler()) return State.Jump;
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) > 12) return State.Run;
         if (IsOnFloor()) return State.Idle;
-        if (Velocity.y < 0) return State.Jump;
         if (Velocity.y > 0) return State.Fall;
         return CurState;
     }
 
     private State Run()
     {
-        MovementHandler();
         SpeedHandler();
-        if (JumpHandler()) return State.Jump;
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) < 10) return State.Idle;
         if (IsOnFloor()) return State.Run;
@@ -72,7 +67,6 @@ public class King : BaseStatedBody<King.State>
 
     private State Jump()
     {
-        MovementHandler();
         SpeedHandler();
         if (IsOnFloor()) return State.Ground;
         if (AttackHandler()) return State.Attack;
@@ -82,7 +76,6 @@ public class King : BaseStatedBody<King.State>
 
     private State Fall()
     {
-        MovementHandler();
         SpeedHandler();
         if (AttackHandler()) return State.Attack;
         if (IsOnFloor()) return State.Ground;
@@ -91,8 +84,6 @@ public class King : BaseStatedBody<King.State>
 
     private State Ground()
     {
-        SpeedHandler();
-        if (JumpHandler(1.1f)) return State.Jump;
         SpeedHandler(0.1f);
         return CurState;
     }
@@ -126,23 +117,23 @@ public class King : BaseStatedBody<King.State>
     }
     #endregion
 
-    private void MovementHandler(float factor = 1f)
+    public void MovementHandler(float dir)
     {
-        var dir = Input.GetActionStrength("right") - Input.GetActionStrength("left");
+        var factor = 1f;
+        if (CurState == State.Ground) factor = .6f;
+        else if (CurState != State.Jump && CurState != State.Fall && CurState != State.Idle && CurState != State.Run) return;
         if (dir != 0) SpriteAnchor.Scale = new Vector2(-dir, 1);
         if (dir != 0) Velocity.x = dir * Speed * factor;
     }
 
-    private bool JumpHandler(float factor = 1f)
+    public bool JumpHandler()
     {
-        if (!IsOnFloor()) return true;
-        if (Input.IsActionJustPressed("jump"))
-        {
-            Velocity.y = -JumpForce * factor;
-            return true;
-        }
-
-        return false;
+        if (CurState != State.Fall || FallTimer <= 0f)
+            if (!IsOnFloor()) return false;
+        var factor = 1f;
+        NextState = State.Jump;
+        Velocity.y = -JumpForce * factor;
+        return true;
     }
 
     private bool AttackHandler()
