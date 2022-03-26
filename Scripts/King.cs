@@ -51,7 +51,11 @@ public class King : BaseStatedBody<King.State>
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) > 12) return State.Run;
         if (IsOnFloor()) return State.Idle;
-        if (Velocity.y > 0) return State.Fall;
+        if (Velocity.y > 0)
+        {
+            FallTimer = .1f;
+            return State.Fall;
+        }
         return CurState;
     }
 
@@ -61,7 +65,11 @@ public class King : BaseStatedBody<King.State>
         if (AttackHandler()) return State.Attack;
         if (Mathf.Abs(Velocity.x) < 10) return State.Idle;
         if (IsOnFloor()) return State.Run;
-        if (Velocity.y > 0) return State.Fall;
+        if (Velocity.y > 0)
+        {
+            FallTimer = .1f;
+            return State.Fall;
+        }
         return CurState;
     }
 
@@ -133,6 +141,7 @@ public class King : BaseStatedBody<King.State>
         var factor = 1f;
         NextState = State.Jump;
         Velocity.y = -JumpForce * factor;
+        GravityTimer = .3f;
         return true;
     }
 

@@ -18,7 +18,8 @@ namespace kingsandpigs.Scripts.Common
         public DlgBox Dlg;
         protected float InvincibleTimer = .4f;
         protected float AtkCD = 1f;
-        protected float FallTimer = .1f;
+        protected float FallTimer = -.1f;
+        public float GravityTimer = -.1f;
         protected Node2D Info;
         public event Action<int, int> OnHealthChange;
         public Action<int> OnDiamondChanged;
@@ -44,21 +45,28 @@ namespace kingsandpigs.Scripts.Common
         public override void _PhysicsProcess(float delta)
         {
             StateUpdate(delta);
-            GravityHandler();
+            GravityHandler(delta);
             Velocity = MoveAndSlide(Velocity, Vector2.Up);
             InvincibleTimer = InvincibleTimer < -.1f ? InvincibleTimer : InvincibleTimer - delta;
-            FallTimer = Velocity.y > 0 ?
-                        FallTimer > 0 ? FallTimer - delta : FallTimer
-                        : .1f;
+            if (Velocity.y > 0)
+                FallTimer = FallTimer > 0 ? FallTimer - delta : FallTimer;
         }
 
         protected virtual void StateUpdate(float delta)
         {
         }
 
-        protected void GravityHandler()
+        protected void GravityHandler(float delta)
         {
-            Velocity.y = Mathf.Clamp(Velocity.y + Gravity, -JumpForce, MaxFallSpeed);
+            var val = Velocity.y;
+            if (Velocity.y > 0) GravityTimer = -.1f;
+            if (GravityTimer > 0)
+            {
+                val += Gravity / 2;
+                GravityTimer -= delta;
+            }
+            else val += Gravity;
+            Velocity.y = Mathf.Clamp(val, -JumpForce, MaxFallSpeed);
         }
 
         protected void SpeedHandler(float factor = 0.2f)

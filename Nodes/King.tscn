@@ -609,6 +609,7 @@ extents = Vector2( 6.5, 12.5 )
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 11 )
+JumpForce = 220
 
 [node name="SpriteAnchor" type="Position2D" parent="."]
 scale = Vector2( -1, 1 )

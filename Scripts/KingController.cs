@@ -22,6 +22,7 @@ public class KingController : PlayerController<King>
         Body.MovementHandler(dir);
         // Jump
         if (Input.IsActionJustPressed("jump")) JumpAction = .06f;
+        if (Input.IsActionJustReleased("jump")) Body.GravityTimer = -.1f;
         if (JumpAction > 0)
         {
             if (Body.JumpHandler()) JumpAction = 0;
