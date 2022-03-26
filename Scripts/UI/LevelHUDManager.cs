@@ -85,10 +85,7 @@ namespace kingsandpigs.Scripts.UI
         public void OnTransitionStop(string name)
         {
             if (name.Contains("In"))
-            {
-                GD.Print("In");
                 OnNextLevel?.Invoke();
-            }
         }
 
         public void OnMenuOut(string name)

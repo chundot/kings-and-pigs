@@ -112,6 +112,7 @@ namespace kingsandpigs.Scripts
 
         public void JumpHandler()
         {
+            if (CurState == State.Hit || CurState == State.Dead) return;
             Velocity.y = -JumpForce;
             NextState = State.Jump;
         }

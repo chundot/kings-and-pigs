@@ -7,6 +7,14 @@
 [sub_resource type="PhysicsMaterial" id=84]
 bounce = 0.5
 
+[sub_resource type="AtlasTexture" id=80]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=81]
+atlas = ExtResource( 2 )
+region = Rect2( 18, 0, 18, 14 )
+
 [sub_resource type="AtlasTexture" id=72]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 18, 14 )
@@ -39,24 +47,16 @@ region = Rect2( 108, 0, 18, 14 )
 atlas = ExtResource( 3 )
 region = Rect2( 126, 0, 18, 14 )
 
-[sub_resource type="AtlasTexture" id=80]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 18, 14 )
-
-[sub_resource type="AtlasTexture" id=81]
-atlas = ExtResource( 2 )
-region = Rect2( 18, 0, 18, 14 )
-
 [sub_resource type="SpriteFrames" id=82]
 animations = [ {
-"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 80 ), SubResource( 81 ) ],
 "loop": false,
 "name": "Hit",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ), SubResource( 78 ), SubResource( 79 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 10.0
 } ]
 
@@ -75,7 +75,7 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 82 )
 animation = "Idle"
-frame = 5
+frame = 6
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

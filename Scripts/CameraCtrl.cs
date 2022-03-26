@@ -5,8 +5,8 @@ using kingsandpigs.Scripts.Common;
 public class CameraCtrl : Camera2D
 {
     private Vector2 _curScreen = Vector2.Zero;
-    private Vector2 _calcSize = new Vector2(480, 288);
-    private Vector2 _scrnSize = new Vector2(512, 360);
+    private Vector2 _calcSize = new Vector2(512, 360);
+    private Vector2 _offset = new Vector2(308, 179);
     private BaseBody _player;
     public override void _Ready()
     {
@@ -24,6 +24,6 @@ public class CameraCtrl : Camera2D
         var screen = (_player.GlobalPosition / _calcSize).Floor();
         if (screen.IsEqualApprox(_curScreen)) return;
         _curScreen = screen;
-        GlobalPosition = _curScreen * _calcSize + 0.5f * _scrnSize;
+        GlobalPosition = _curScreen * _calcSize + _offset;
     }
 }
