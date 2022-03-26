@@ -6,7 +6,7 @@ public class Door : AnimatedSprite
     [Export] public bool IsEntry;
     public string NextLevel;
     public bool IsOpen;
-    private PlayerController _player;
+    private KingController _player;
     private Sprite _tip;
     public override void _Ready()
     {
@@ -31,13 +31,13 @@ public class Door : AnimatedSprite
     public void OnPlayerEnter(Area2D area)
     {
         if (IsEntry) return;
-        if (_player is null) _player = area.GetParent().GetParent<PlayerController>();
+        if (_player is null) _player = area.GetParent().GetParent<KingController>();
         Play("Opening");
     }
     public void OnPlayerExit(Area2D area)
     {
         if (IsEntry) return;
-        if (_player is null) _player = area.GetParent().GetParent<PlayerController>();
+        if (_player is null) _player = area.GetParent().GetParent<KingController>();
         _player.CanEnterDoor = false;
         Play("Closing");
         _tip.Visible = false;

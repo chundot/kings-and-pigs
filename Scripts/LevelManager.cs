@@ -5,14 +5,14 @@ using kingsandpigs.Scripts.UI;
 public class LevelManager : Node2D
 {
     private LevelHUDManager _hud;
-    private PlayerController _player;
+    private KingController _player;
     [Export] public string NextLevel;
     public override void _Ready()
     {
         _hud = GD.Load<PackedScene>("res://Nodes/HUD/LevelHUD.tscn").Instance<LevelHUDManager>();
         AddChild(_hud);
         _hud.OnNextLevel += GoNextLevel;
-        _player = GetNode<PlayerController>("Player");
+        _player = GetNode<KingController>("Player");
         _player.UpdateEvent(_hud.HealthChange, _hud.DiamondChange, _hud.TransIn);
     }
 
