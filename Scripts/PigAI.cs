@@ -41,8 +41,9 @@ namespace kingsandpigs.Scripts
         private State Follow()
         {
             if (_target is null) return State.Idle;
-            var dir = GlobalPosition.x > _target.GlobalPosition.x ? -1 : 1;
-            Body.MovementHandler(dir);
+            var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
+            var dir = xDelta > 0 ? -1 : 1;
+            if (Mathf.Abs(xDelta) > 4f) Body.MovementHandler(dir);
             if (Body.IsOnFloor())
                 if (!RayCast.IsColliding()) Body.JumpHandler();
             return CurState;

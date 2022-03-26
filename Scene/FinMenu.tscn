@@ -97,4 +97,5 @@ __meta__ = {
 
 [node name="Trans" parent="." instance=ExtResource( 5 )]
 
+[connection signal="pressed" from="Panel/Next" to="." method="OnNext"]
 [connection signal="pressed" from="Panel/Menu" to="." method="OnMenu"]

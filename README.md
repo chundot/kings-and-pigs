@@ -5,7 +5,7 @@ a platformer game based on godot engine mono.
 - [ ] game ui;
   - [x] main menu;
   - [ ] select level;
-  - [ ] level finished.
+  - [x] level finished.
   - [x] pause menu.
 - [ ] level design;
   - [x] tilemap;

@@ -48,53 +48,6 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="Animation" id=84]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 68, -282 ) ]
-}
-
-[sub_resource type="Animation" id=82]
-resource_name = "TriIn"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 628, -282 ), Vector2( 68, -282 ) ]
-}
-
-[sub_resource type="Animation" id=83]
-resource_name = "TriOut"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 68, -282 ), Vector2( -498, -282 ) ]
-}
-
 [sub_resource type="Animation" id=85]
 resource_name = "In"
 length = 0.2
@@ -154,6 +107,53 @@ tracks/1/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ) ]
 }
 
+[sub_resource type="Animation" id=84]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 68, -282 ) ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "TriIn"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 628, -282 ), Vector2( 68, -282 ) ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "TriOut"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 68, -282 ), Vector2( -498, -282 ) ]
+}
+
 [node name="LevelHUD" type="CanvasLayer"]
 pause_mode = 2
 scale = Vector2( 3, 3 )
@@ -182,28 +182,10 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 5
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
-}
-
-[node name="Trans" type="AnimationPlayer" parent="."]
-pause_mode = 2
-root_node = NodePath("ColorRect")
-anims/RESET = SubResource( 84 )
-anims/TriIn = SubResource( 82 )
-anims/TriOut = SubResource( 83 )
-
-[node name="ColorRect" type="ColorRect" parent="Trans"]
-margin_left = 68.0
-margin_top = -282.0
-margin_right = 767.0
-margin_bottom = 116.0
-rect_rotation = 45.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
 }
 
 [node name="Pause" type="AnimationPlayer" parent="."]
@@ -300,6 +282,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="animation_finished" from="Trans" to="." method="OnTransitionStop"]
+[node name="Trans" type="AnimationPlayer" parent="."]
+pause_mode = 2
+root_node = NodePath("ColorRect")
+anims/RESET = SubResource( 84 )
+anims/TriIn = SubResource( 82 )
+anims/TriOut = SubResource( 83 )
+
+[node name="ColorRect" type="ColorRect" parent="Trans"]
+margin_left = 68.0
+margin_top = -282.0
+margin_right = 767.0
+margin_bottom = 116.0
+rect_rotation = 45.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="animation_finished" from="Pause" to="." method="OnMenuOut"]
 [connection signal="pressed" from="Pause/Position2D/PauseMenu/VBoxContainer/Resume" to="." method="Pause"]
+[connection signal="pressed" from="Pause/Position2D/PauseMenu/VBoxContainer/Menu" to="." method="Menu"]
+[connection signal="animation_finished" from="Trans" to="." method="OnTransitionStop"]

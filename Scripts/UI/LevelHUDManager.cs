@@ -19,8 +19,8 @@ namespace kingsandpigs.Scripts.UI
             InitHeart();
             _liveBar = GetChild<TextureRect>(0);
             _diamondLabel = GetChild<Label>(1);
-            _transitionPlayer = GetChild<AnimationPlayer>(2);
-            _menu = GetChild<AnimationPlayer>(3);
+            _menu = GetChild<AnimationPlayer>(2);
+            _transitionPlayer = GetChild<AnimationPlayer>(3);
             _hearts.ForEach(h => _liveBar.AddChild(h));
             DiamondChange(GlobalVar.Diamond);
             TransOut();
@@ -76,10 +76,19 @@ namespace kingsandpigs.Scripts.UI
             }
         }
 
+        public void Menu()
+        {
+            OnNextLevel = () => GetTree().ChangeScene("res://Scene/MainMenu.tscn");
+            _transitionPlayer.Play("TriIn");
+        }
+
         public void OnTransitionStop(string name)
         {
             if (name.Contains("In"))
+            {
+                GD.Print("In");
                 OnNextLevel?.Invoke();
+            }
         }
 
         public void OnMenuOut(string name)
