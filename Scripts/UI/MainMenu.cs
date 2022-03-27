@@ -15,7 +15,7 @@ public class MainMenu : Control
     public void OnStart()
     {
         _sfx.Play("Click");
-        _trans.OnInStop += () => GetTree().ChangeScene("res://Scene/Levels/Level1-1.tscn");
+        _trans.OnInStop += () => GetTree().ChangeScene("res://Scene/SelectMenu.tscn");
         _trans.TransIn();
     }
     public void OnContinue()
