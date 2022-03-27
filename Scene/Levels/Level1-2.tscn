@@ -727,7 +727,7 @@ script = ExtResource( 8 )
 
 [node name="TipArea" type="Area2D" parent="Tip2"]
 position = Vector2( 251, 245 )
-z_index = 10
+z_index = 50
 collision_layer = 0
 collision_mask = 32
 

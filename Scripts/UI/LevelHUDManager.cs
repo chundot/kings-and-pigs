@@ -82,6 +82,12 @@ namespace kingsandpigs.Scripts.UI
             _transitionPlayer.Play("TriIn");
         }
 
+        public void Level()
+        {
+            OnNextLevel = () => GetTree().ChangeScene("res://Scene/SelectMenu.tscn");
+            _transitionPlayer.Play("TriIn");
+        }
+
         public void OnTransitionStop(string name)
         {
             if (name.Contains("In"))

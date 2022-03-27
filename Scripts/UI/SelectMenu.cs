@@ -6,6 +6,7 @@ public class SelectMenu : Control
     private SceneTrans _trans;
     public override void _Ready()
     {
+        GetTree().Paused = false;
         var grid = GetChild<Panel>(0).GetChild<GridContainer>(1);
         _trans = GetChild<SceneTrans>(1);
         var lvlBtn = GD.Load<PackedScene>("res://Nodes/HUD/LevelButton.tscn");

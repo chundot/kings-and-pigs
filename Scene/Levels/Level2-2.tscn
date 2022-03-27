@@ -667,7 +667,7 @@ position = Vector2( 304, 120 )
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Pig" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 161, 151 )
+position = Vector2( 141, 151 )
 
 [node name="SpriteAnchor" parent="Enemies/Pig" index="0"]
 scale = Vector2( -1, 1 )

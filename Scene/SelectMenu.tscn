@@ -9,6 +9,7 @@
 bg_color = Color( 0.247059, 0.219608, 0.317647, 0.862745 )
 
 [node name="SelectMenu" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -768.0

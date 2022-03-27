@@ -9,6 +9,8 @@ public class FinMenu : Control
     public override void _Ready()
     {
         if (GlobalVar.CurLevel == GlobalVar.LevelNum) GetChild<Panel>(0).GetChild<Button>(1).Disabled = true;
+        if (GlobalVar.CurLevel + 1 <= GlobalVar.LevelNum)
+            GlobalVar.UnlockedLevel = Mathf.Max(GlobalVar.CurLevel + 1, GlobalVar.UnlockedLevel);
         _trans = GetChild<SceneTrans>(1);
         _sfx = GetChild<SfxMgr>(2);
         _trans.OnInStop += () => GlobalVar.Diamond = 0;
@@ -23,7 +25,7 @@ public class FinMenu : Control
     public void OnNext()
     {
         _sfx.Play("Click");
-        GlobalVar.UnlockedLevel = Mathf.Max(++GlobalVar.CurLevel, GlobalVar.UnlockedLevel);
+        GlobalVar.CurLevel += 1;
         _trans.OnInStop += () => GetTree().ChangeScene($"res://Scene/Levels/Level{GlobalVar.CurLevel}-1.tscn");
         _trans.TransIn();
     }
