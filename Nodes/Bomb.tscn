@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Bomb.cs" type="Script" id=1]
 [ext_resource path="res://Assets/09-Bomb/Bomb On (52x56).png" type="Texture" id=2]
 [ext_resource path="res://Assets/09-Bomb/Bomb Off.png" type="Texture" id=3]
 [ext_resource path="res://Assets/09-Bomb/Boooooom (52x56).png" type="Texture" id=4]
+[ext_resource path="res://Assets/17-Sound/explosion4.ogg" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=89]
 resource_name = "Boom"
@@ -55,6 +56,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=85]
@@ -237,6 +252,10 @@ collision_mask = 11
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 0.5, 5 )
 shape = SubResource( 91 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

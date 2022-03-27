@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Assets/01-King Human/Door Out (78x58).png" type="Texture" id=1]
 [ext_resource path="res://Assets/01-King Human/Fall (78x58).png" type="Texture" id=2]
@@ -12,6 +12,13 @@
 [ext_resource path="res://Assets/01-King Human/Run (78x58).png" type="Texture" id=10]
 [ext_resource path="res://Scripts/King.cs" type="Script" id=11]
 [ext_resource path="res://Nodes/DlgBox.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/17-Sound/hurt3.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Assets/17-Sound/hit1.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Assets/17-Sound/footstep_concrete_003.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Assets/17-Sound/footstep_carpet_004.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Assets/17-Sound/footstep_carpet_000.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Assets/17-Sound/footstep_carpet_003.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Assets/17-Sound/jump3.ogg" type="AudioStream" id=19]
 
 [sub_resource type="Animation" id=69]
 resource_name = "Attack"
@@ -75,6 +82,20 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 ), PoolVector2Array( -14, -16, -14, -23, -17, -27, -24, -27, -33, -23, -40, -14, -40, -3, -37, 5, -30, 13, -27, 13, -31, -1 ) ]
+}
+tracks/5/type = "audio"
+tracks/5/path = NodePath("Audio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=70]
@@ -180,6 +201,28 @@ tracks/3/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0432887,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+}, {
+"end_offset": 0.0721478,
+"start_offset": 0.0,
+"stream": ExtResource( 16 )
+}, {
+"end_offset": 0.0548323,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0.1, 0.4, 0.7 )
+}
 
 [sub_resource type="Animation" id=72]
 resource_name = "DoorOut"
@@ -231,6 +274,28 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0432887,
+"start_offset": 0.0,
+"stream": ExtResource( 17 )
+}, {
+"end_offset": 0.0721478,
+"start_offset": 0.0,
+"stream": ExtResource( 16 )
+}, {
+"end_offset": 0.0548323,
+"start_offset": 0.0,
+"stream": ExtResource( 18 )
+} ],
+"times": PoolRealArray( 0.1, 0.4, 0.7 )
 }
 
 [sub_resource type="Animation" id=68]
@@ -337,6 +402,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=66]
 resource_name = "Hit"
@@ -388,6 +467,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 13 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=62]
@@ -445,7 +538,8 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=65]
 resource_name = "Jump"
-length = 0.1
+length = 0.25
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteAnchor/Sprite:texture")
 tracks/0/interp = 1
@@ -633,7 +727,6 @@ collision_mask = 5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpriteAnchor/AttackBox"]
 polygon = PoolVector2Array( -25, -25, -35, -25, -45, -15, -47, 2, -45, 12, -33, 25, -19, 27, -6, 27, 3, 24, 12, 16, 12, 14, -13, 18, -23, 12, -25, -1, -19, -18 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 69 )
@@ -681,6 +774,14 @@ __meta__ = {
 
 [node name="DlgBox" parent="." instance=ExtResource( 12 )]
 position = Vector2( 17, -17 )
+
+[node name="Audio2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -4.0
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -4.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 0.5 )

@@ -1,11 +1,20 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/Diamond.cs" type="Script" id=1]
 [ext_resource path="res://Assets/12-Live and Coins/Big Diamond Idle (18x14).png" type="Texture" id=2]
 [ext_resource path="res://Assets/12-Live and Coins/Big Diamond Hit (18x14).png" type="Texture" id=3]
+[ext_resource path="res://Assets/17-Sound/coin5.ogg" type="AudioStream" id=4]
 
 [sub_resource type="PhysicsMaterial" id=63]
 bounce = 0.3
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 18, 14 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 3 )
+region = Rect2( 18, 0, 18, 14 )
 
 [sub_resource type="AtlasTexture" id=49]
 atlas = ExtResource( 2 )
@@ -47,24 +56,16 @@ region = Rect2( 144, 0, 18, 14 )
 atlas = ExtResource( 2 )
 region = Rect2( 162, 0, 18, 14 )
 
-[sub_resource type="AtlasTexture" id=59]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 18, 14 )
-
-[sub_resource type="AtlasTexture" id=60]
-atlas = ExtResource( 3 )
-region = Rect2( 18, 0, 18, 14 )
-
 [sub_resource type="SpriteFrames" id=61]
 animations = [ {
-"frames": [ SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
 "frames": [ SubResource( 59 ), SubResource( 60 ) ],
 "loop": false,
 "name": "Hit",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 49 ), SubResource( 50 ), SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ), SubResource( 58 ) ],
+"loop": true,
+"name": "Idle",
 "speed": 10.0
 } ]
 
@@ -83,11 +84,14 @@ script = ExtResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 61 )
 animation = "Idle"
-frame = 7
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -14.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2, 0 )
@@ -97,3 +101,4 @@ __meta__ = {
 }
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="OnAnimationFinished"]
+[connection signal="finished" from="Audio" to="." method="OnAudioFinished"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/03-Pig/Idle (34x28).png" type="Texture" id=1]
 [ext_resource path="res://Assets/03-Pig/Jump (34x28).png" type="Texture" id=2]
+[ext_resource path="res://Assets/17-Sound/hurt2.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Assets/03-Pig/Hit (34x28).png" type="Texture" id=4]
 [ext_resource path="res://Assets/03-Pig/Attack (34x28).png" type="Texture" id=5]
 [ext_resource path="res://Assets/03-Pig/Run (34x28).png" type="Texture" id=6]
@@ -10,6 +11,9 @@
 [ext_resource path="res://Scripts/Pig.cs" type="Script" id=9]
 [ext_resource path="res://Nodes/DlgBox.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Assets/03-Pig/Fall (34x28).png" type="Texture" id=11]
+[ext_resource path="res://Assets/17-Sound/footstep_concrete_003.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/17-Sound/hit5.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Assets/17-Sound/jump3.ogg" type="AudioStream" id=15]
 
 [sub_resource type="Animation" id=56]
 resource_name = "Attack"
@@ -73,6 +77,20 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ PoolVector2Array( -17, -15, -15, -17, -12, -17, -11, -16, -11, -12, -13, -4, -9, 3, -14, 3, -17, -1, -19, -5, -19, -11 ), PoolVector2Array( -10, -19, -7, -19, -7, -16, -12, -13, -14, -9, -15, -9, -15, -16 ) ]
+}
+tracks/5/type = "audio"
+tracks/5/path = NodePath("Audio")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 14 )
+} ],
+"times": PoolRealArray( 0.2 )
 }
 
 [sub_resource type="Animation" id=57]
@@ -231,6 +249,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 12 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=51]
 resource_name = "Hit"
@@ -282,6 +314,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 3 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=50]
@@ -339,7 +385,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=52]
 resource_name = "Jump"
-length = 0.1
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteAnchor/Sprite:texture")
 tracks/0/interp = 1
@@ -387,6 +433,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/4/type = "audio"
+tracks/4/path = NodePath("Audio2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 15 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=53]
@@ -557,6 +617,14 @@ shape = SubResource( 60 )
 
 [node name="DlgBox" parent="." instance=ExtResource( 10 )]
 position = Vector2( 17, -17 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = -4.0
+
+[node name="Audio2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )

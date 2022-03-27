@@ -61,7 +61,7 @@ namespace kingsandpigs.Scripts
 
         private State Fall()
         {
-            SpeedHandler(.08f);
+            SpeedHandler(.1f);
             if (IsOnFloor()) return State.Ground;
             return CurState;
         }
@@ -89,7 +89,7 @@ namespace kingsandpigs.Scripts
 
         private State Jump()
         {
-            SpeedHandler(.08f);
+            SpeedHandler(.1f);
             if (Velocity.y > 0) return State.Fall;
             return CurState;
         }

@@ -4,18 +4,20 @@ using Godot;
 public class Crate : RigidBody2D
 {
     private AnimatedSprite _sprite;
-    private Vector2 _velocity = Vector2.Zero;
+    private AudioStreamPlayer _audio;
     private int dir = 0;
     [Export] public bool FaceRight = false;
     public override void _Ready()
     {
         _sprite = GetChild<AnimatedSprite>(0);
+        _audio = GetChild<AudioStreamPlayer>(1);
         _sprite.FlipH = FaceRight;
     }
 
     public void ToHit()
     {
         _sprite.Play("Hit");
+        _audio.Play();
     }
 
     private void GenerateFragments()
@@ -62,8 +64,14 @@ public class Crate : RigidBody2D
         {
             GenerateFragments();
             GenerateRndItems();
-            QueueFree();
+            _sprite.Visible = false;
+            GetChild<CollisionShape2D>(3).Disabled = true;
         }
+    }
+
+    public void AudioFinished()
+    {
+        QueueFree();
     }
 
     public void OnHitBoxEntered(Area2D body)

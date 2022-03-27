@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/15-Font/BMFont.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://Scripts/UI/LevelHUDManager.cs" type="Script" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Assets/15-Font/BasicPupWhite.fnt" type="BitmapFont" id=5]
 [ext_resource path="res://Nodes/HUD/Banner0.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Resource/Btn0.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets/17-Sound/minimize_009.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/17-Sound/maximize_009.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/17-Sound/woosh3.ogg" type="AudioStream" id=10]
 
 [sub_resource type="AtlasTexture" id=63]
 atlas = ExtResource( 3 )
@@ -51,6 +54,7 @@ animations = [ {
 [sub_resource type="Animation" id=85]
 resource_name = "In"
 length = 0.2
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pause/Position2D:scale")
 tracks/0/interp = 1
@@ -63,10 +67,25 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Pause/In")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0290868,
+"start_offset": 0.0,
+"stream": ExtResource( 9 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=86]
 resource_name = "Out"
 length = 0.2
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pause/Position2D:scale")
 tracks/0/interp = 1
@@ -78,6 +97,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Pause/In")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.05,
+"stream": ExtResource( 8 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=87]
@@ -137,6 +170,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 628, -282 ), Vector2( 68, -282 ) ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("../Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0248014,
+"start_offset": 0.2,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=83]
 resource_name = "TriOut"
@@ -152,6 +199,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 68, -282 ), Vector2( -498, -282 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("../Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0241965,
+"start_offset": 0.2,
+"stream": ExtResource( 10 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [node name="LevelHUD" type="CanvasLayer"]
@@ -182,7 +243,7 @@ __meta__ = {
 [node name="DiamondUI" type="AnimatedSprite" parent="DiamonLabel"]
 position = Vector2( -9, 5 )
 frames = SubResource( 71 )
-frame = 2
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -282,6 +343,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="In" type="AudioStreamPlayer" parent="Pause"]
+stream = ExtResource( 9 )
+
 [node name="Trans" type="AnimationPlayer" parent="."]
 pause_mode = 2
 root_node = NodePath("ColorRect")
@@ -299,6 +363,9 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Audio" type="AudioStreamPlayer" parent="Trans"]
+stream = ExtResource( 10 )
 
 [connection signal="animation_finished" from="Pause" to="." method="OnMenuOut"]
 [connection signal="pressed" from="Pause/Position2D/PauseMenu/VBoxContainer/Resume" to="." method="Pause"]

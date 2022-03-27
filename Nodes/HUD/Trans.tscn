@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/SceneTrans.cs" type="Script" id=1]
+[ext_resource path="res://Assets/17-Sound/woosh3.ogg" type="AudioStream" id=2]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -32,6 +33,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 467.5, -211 ), Vector2( 49, -211 ) ]
 }
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0260113,
+"start_offset": 0.2,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=3]
 resource_name = "TransOut"
@@ -47,6 +62,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 49, -211 ), Vector2( -372, -211 ) ]
+}
+tracks/1/type = "audio"
+tracks/1/path = NodePath("Audio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"clips": [ {
+"end_offset": 0.0260113,
+"start_offset": 0.2,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0 )
 }
 
 [node name="Trans" type="ColorRect"]
@@ -65,5 +94,7 @@ __meta__ = {
 anims/RESET = SubResource( 4 )
 anims/TransIn = SubResource( 2 )
 anims/TransOut = SubResource( 3 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnTransStop"]

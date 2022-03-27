@@ -7,9 +7,11 @@ using kingsandpigs.Scripts.Common;
 public class King : BaseStatedBody<King.State>
 {
     public Action OnNextLevel;
+    private AudioStreamPlayer _jump;
     public override void _Ready()
     {
         base._Ready();
+        _jump = GetChild<AudioStreamPlayer>(5);
         TransTo(State.Idle);
 
         OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
@@ -138,6 +140,7 @@ public class King : BaseStatedBody<King.State>
     {
         if (CurState != State.Fall || FallTimer <= 0f)
             if (!IsOnFloor()) return false;
+        _jump.Play();
         var factor = 1f;
         NextState = State.Jump;
         Velocity.y = -JumpForce * factor;

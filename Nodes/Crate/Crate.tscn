@@ -1,22 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/08-Box/Idle.png" type="Texture" id=1]
 [ext_resource path="res://Assets/08-Box/Hit.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Crate.cs" type="Script" id=3]
+[ext_resource path="res://Assets/17-Sound/hit2.ogg" type="AudioStream" id=4]
 
 [sub_resource type="PhysicsMaterial" id=75]
 bounce = 0.2
 
 [sub_resource type="SpriteFrames" id=72]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": false,
-"name": "Idle",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "Hit",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": false,
+"name": "Idle",
 "speed": 10.0
 } ]
 
@@ -44,6 +45,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -8.0
+
 [node name="HitBox" type="Area2D" parent="."]
 rotation = 3.14159
 scale = Vector2( 1, -1 )
@@ -62,4 +67,5 @@ __meta__ = {
 }
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="OnAnimationFinished"]
+[connection signal="finished" from="Hit" to="." method="AudioFinished"]
 [connection signal="area_entered" from="HitBox" to="." method="OnHitBoxEntered"]
