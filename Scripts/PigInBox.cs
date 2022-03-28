@@ -79,9 +79,11 @@ namespace kingsandpigs.Scripts
 
         public void ReadyJump(int dir)
         {
-            if (CurState != State.Idle && CurState != State.LookingOut) return;
-            _jmpDir = dir;
-            NextState = State.BeforeJump;
+            if (CurState is State.Idle or State.LookingOut)
+            {
+                _jmpDir = dir;
+                NextState = State.BeforeJump;
+            }
         }
 
         private void GenerateFragments()

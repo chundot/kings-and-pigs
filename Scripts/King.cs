@@ -128,15 +128,15 @@ public class King : BaseStatedBody<King.State>
     public void MovementHandler(float dir)
     {
         var factor = 1f;
-        if (CurState == State.Ground) factor = .6f;
-        else if (CurState != State.Jump && CurState != State.Fall && CurState != State.Idle && CurState != State.Run) return;
+        if (CurState is State.Ground) factor = .6f;
+        else if (!(CurState is State.Jump or State.Fall or State.Idle or State.Run)) return;
         if (dir != 0) SpriteAnchor.Scale = new Vector2(-dir, 1);
         if (dir != 0) Velocity.x = dir * Speed * factor;
     }
 
     public bool JumpHandler()
     {
-        if (CurState != State.Fall || FallTimer <= 0f)
+        if (CurState is State.Fall || FallTimer <= 0f)
             if (!IsOnFloor()) return false;
         _jump.Play();
         var factor = 1f;

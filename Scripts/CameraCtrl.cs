@@ -5,8 +5,8 @@ using kingsandpigs.Scripts.Common;
 public class CameraCtrl : Camera2D
 {
     private Vector2 _curScreen = Vector2.Zero;
-    private Vector2 _calcSize = new Vector2(512, 320);
-    private Vector2 _offset = new Vector2(308, 179);
+    private Vector2 _calcSize = new(512, 320);
+    private Vector2 _offset = new(308, 179);
     private BaseBody _player;
     public override void _Ready()
     {

@@ -105,14 +105,14 @@ namespace kingsandpigs.Scripts
         }
         public void MovementHandler(float dir, float factor = 1f)
         {
-            if (CurState == State.Hit || CurState == State.Dead || CurState == State.Attack) return;
+            if (CurState is State.Hit or State.Dead or State.Attack) return;
             SpriteAnchor.Scale = new Vector2(-dir, 1);
             Velocity.x = Mathf.Lerp(Velocity.x, dir * Speed * factor, 0.2f);
         }
 
         public void JumpHandler()
         {
-            if (CurState == State.Hit || CurState == State.Dead) return;
+            if (CurState is State.Hit or State.Dead) return;
             Velocity.y = -JumpForce;
             NextState = State.Jump;
         }

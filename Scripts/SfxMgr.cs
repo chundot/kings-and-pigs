@@ -5,7 +5,7 @@ using Godot.Collections;
 
 public class SfxMgr : Node
 {
-    private Dictionary<string, AudioStreamPlayer> _dic = new Dictionary<string, AudioStreamPlayer>();
+    private Dictionary<string, AudioStreamPlayer> _dic = new();
     public override void _Ready()
     {
         var children = GetChildren().Cast<AudioStreamPlayer>();

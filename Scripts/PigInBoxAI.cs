@@ -8,8 +8,6 @@ namespace kingsandpigs.Scripts
     {
         private Area2D _target;
         private int _dir = 1;
-        private float _wanderFactor = .8f;
-        private readonly Random _rnd = new Random();
         public override void _Ready()
         {
             CurState = State.Idle;
@@ -33,7 +31,7 @@ namespace kingsandpigs.Scripts
                 CurState = state;
         }
 
-        private State Idle(float delta)
+        private State Idle(float _)
         {
             return CurState;
         }

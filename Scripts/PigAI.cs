@@ -8,8 +8,8 @@ namespace kingsandpigs.Scripts
     {
         private Area2D _target;
         private int _dir = 1;
-        private float _wanderFactor = .8f;
-        private readonly Random _rnd = new Random();
+        private readonly float _wanderFactor = .8f;
+        private readonly Random _rnd = new();
         [Export] public bool Triggered;
         public override void _Ready()
         {
