@@ -7,6 +7,7 @@ a platformer game based on godot engine mono.
   - [x] select level;
   - [x] level finished;
   - [ ] death menu;
+    - [x] reset tip when dying.
   - [x] pause menu.
 - [ ] level design;
   - [x] tilemap;
@@ -15,9 +16,10 @@ a platformer game based on godot engine mono.
 - [ ] enemy ai;
   - [x] normal pig;
   - [ ] crate pig;
-  - [ ] pig in crate;
+  - [x] pig in crate;
   - [ ] bomb pig;
-  - [ ] pig with march.
+  - [ ] pig with march;
+  - [ ] pig king.
 - [x] player controller optimization;
   - [x] responsive jump before touching ground;
   - [x] responsive jump when falling in a short time;
@@ -28,4 +30,5 @@ a platformer game based on godot engine mono.
 - [x] player health ui;
 - [ ] player and enemy movement fx;
 - [ ] bgm and sfx;
-- [x] dialog boxes.
+- [x] dialog boxes;
+- [ ] save feature.

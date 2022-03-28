@@ -8,7 +8,7 @@ namespace kingsandpigs.Scripts.Common
         protected RayCast2D RayCast;
         protected TBody Body;
         protected TState CurState = default;
-        protected TState NextState = default;
+        protected TState NextState;
         protected bool IsDead = false;
 
         protected float TransTimer = 1f;

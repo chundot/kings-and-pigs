@@ -14,7 +14,7 @@ public class King : BaseStatedBody<King.State>
         _jump = GetChild<AudioStreamPlayer>(5);
         TransTo(State.Idle);
 
-        OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
+        OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal || newVal == 0 ? State.Hit : NextState;
     }
 
     protected override void StateUpdate(float delta)

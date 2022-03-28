@@ -16,6 +16,7 @@ public class KingController : PlayerController<King>
     public override void _PhysicsProcess(float delta)
     {
         base._PhysicsProcess(delta);
+        if (Body.Health == 0) return;
         if (CanEnterDoor && Input.IsActionJustPressed("enter_door"))
             Body.NextState = King.State.DoorIn;
         // Movement

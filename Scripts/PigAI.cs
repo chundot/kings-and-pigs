@@ -78,6 +78,12 @@ namespace kingsandpigs.Scripts
         }
         private State TryAttack()
         {
+            if (_target != null)
+            {
+                var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
+                _dir = xDelta > 0 ? -1 : 1;
+                Body.MovementHandler(_dir, 0);
+            }
             return CurState;
         }
 
@@ -102,14 +108,14 @@ namespace kingsandpigs.Scripts
             if (IsDead) return;
             Body.Dlg.Display(DlgType.ExcIn);
             _target = area;
-            NextState = State.Follow;
+            CurState = State.Follow;
         }
         public void OnViewRangeExited(Area2D _)
         {
             if (IsDead) return;
             _target = null;
             Body.Dlg.Display(DlgType.ItgIn);
-            NextState = State.Idle;
+            CurState = State.Idle;
         }
         #endregion
         public enum State
