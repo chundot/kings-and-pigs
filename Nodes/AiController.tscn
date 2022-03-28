@@ -12,7 +12,7 @@ extents = Vector2( 92.5, 13.5 )
 script = ExtResource( 2 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2( 2, 0 )
+position = Vector2( -4, 0 )
 enabled = true
 cast_to = Vector2( 0, 12 )
 

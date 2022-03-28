@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nodes/King.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/KingController.cs" type="Script" id=2]
+[ext_resource path="res://Assets/15-Font/BasicPupBlack.fnt" type="BitmapFont" id=3]
+[ext_resource path="res://Assets/16-UI/tile_0088.png" type="Texture" id=4]
+[ext_resource path="res://Assets/16-UI/Panel2.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16.5, 18.5 )
@@ -20,3 +23,40 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="King/Detect"]
 position = Vector2( -0.5, -5.5 )
 shape = SubResource( 1 )
+
+[node name="Death" type="Node2D" parent="King"]
+visible = false
+z_index = 40
+
+[node name="NinePatchRect" type="NinePatchRect" parent="King/Death"]
+margin_left = -47.0
+margin_top = -44.0
+margin_right = 47.0
+margin_bottom = -16.0
+texture = ExtResource( 5 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R" type="Sprite" parent="King/Death/NinePatchRect"]
+position = Vector2( 13, 14 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="King/Death/NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -37.0
+margin_top = -8.0
+margin_right = 37.0
+margin_bottom = 8.0
+custom_fonts/font = ExtResource( 3 )
+text = "  to restart"
+__meta__ = {
+"_edit_use_anchors_": false
+}

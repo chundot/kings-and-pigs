@@ -39,6 +39,7 @@ namespace kingsandpigs.Scripts.Common
                 if (KilledBy != null) KilledBy.Dlg.Display(DlgType.LoserIn);
                 this.SetLayerBit(LayerEnum.Rb);
                 this.SetLayerBit(LayerEnum.DeadBody);
+                GetNode<CollisionShape2D>("HitBox/CollisionShape2D").Disabled = true;
             };
         }
 

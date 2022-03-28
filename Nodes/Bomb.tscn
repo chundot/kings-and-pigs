@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Bomb.cs" type="Script" id=1]
 [ext_resource path="res://Assets/09-Bomb/Bomb On (52x56).png" type="Texture" id=2]
 [ext_resource path="res://Assets/09-Bomb/Bomb Off.png" type="Texture" id=3]
 [ext_resource path="res://Assets/09-Bomb/Boooooom (52x56).png" type="Texture" id=4]
 [ext_resource path="res://Assets/17-Sound/explosion4.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Scripts/Utils/DirRayCasts.cs" type="Script" id=6]
 
 [sub_resource type="Animation" id=89]
 resource_name = "Boom"
@@ -223,6 +224,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
+offset = Vector2( 0, -5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -234,6 +236,8 @@ anims/On = SubResource( 88 )
 anims/RESET = SubResource( 86 )
 
 [node name="BoomBox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -5 )
 collision_layer = 8
 collision_mask = 0
 __meta__ = {
@@ -241,11 +245,12 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoomBox"]
-visible = false
 shape = SubResource( 90 )
 disabled = true
 
 [node name="HitBox" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -5 )
 collision_layer = 4
 collision_mask = 11
 
@@ -257,9 +262,20 @@ shape = SubResource( 91 )
 stream = ExtResource( 5 )
 volume_db = -5.0
 
+[node name="Rays" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="U" type="RayCast2D" parent="Rays"]
+cast_to = Vector2( 0, -8 )
+
+[node name="R" type="RayCast2D" parent="Rays"]
+cast_to = Vector2( 8, 0 )
+
+[node name="L" type="RayCast2D" parent="Rays"]
+cast_to = Vector2( -8, 0 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2( 0, 4 )
 shape = SubResource( 87 )
 __meta__ = {
 "_edit_lock_": true

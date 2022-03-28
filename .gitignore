@@ -2,5 +2,6 @@
 .import
 .mono
 .vscode
+dist
 *.translation
 export_presets.cfg

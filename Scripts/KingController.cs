@@ -8,6 +8,7 @@ public class KingController : PlayerController<King>
     public override void _Ready()
     {
         base._Ready();
+        Body.OnDeath += () => GetNode<Node2D>("King/Death").Visible = true;
         if (Entering)
             Body.NextState = King.State.DoorOut;
     }
@@ -28,6 +29,7 @@ public class KingController : PlayerController<King>
             if (Body.JumpHandler()) JumpAction = 0;
             JumpAction -= delta;
         }
+        if (Input.IsActionJustPressed("suicide")) Body.HealthChange(1);
     }
     public void UpdateEvent(Action<int, int> onHealthChange, Action<int> onDiamondChange, Action onNextLevel)
     {

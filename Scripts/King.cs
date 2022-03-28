@@ -19,8 +19,6 @@ public class King : BaseStatedBody<King.State>
 
     protected override void StateUpdate(float delta)
     {
-        if (Input.IsActionJustPressed("suicide")) HealthChange(1);
-        if (Input.IsActionJustPressed("recover")) HealthChange(-1);
         if (Input.IsActionJustPressed("sayhi")) Dlg.Display(DlgType.HiIn);
         var state = CurState switch
         {
@@ -186,6 +184,11 @@ public class King : BaseStatedBody<King.State>
             State.DoorOut => State.Idle,
             _ => NextState
         };
+        if (state is State.Dead)
+        {
+            OnDeath?.Invoke();
+            OnDeath = null;
+        }
         if (state is State.DoorIn)
         {
             Visible = false;

@@ -15,7 +15,7 @@ namespace kingsandpigs.Scripts.Common
         public override void _Ready()
         {
             Body = GetParent<Position2D>().GetParent<TBody>();
-            Body.OnDeath = () =>
+            Body.OnDeath += () =>
             {
                 QueueFree();
                 IsDead = true;
@@ -24,11 +24,11 @@ namespace kingsandpigs.Scripts.Common
         }
         public override void _PhysicsProcess(float delta)
         {
-            StateUpdate();
+            StateUpdate(delta);
             TransTimer = TransTimer < 0 ? TransTimer : TransTimer - delta;
         }
 
-        protected virtual void StateUpdate() { }
+        protected virtual void StateUpdate(float delta) { }
     }
 
 }
