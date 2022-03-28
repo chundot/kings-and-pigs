@@ -1,6 +1,12 @@
-# kings-and-pigs
+# Kings and Pigs
+
+## Introduction
 
 a platformer game based on godot engine mono.
+
+you can try it on: https://chundot.itch.io/kings-and-pigs
+
+## Todos
 
 - [ ] game ui;
   - [x] main menu;
@@ -30,5 +36,7 @@ a platformer game based on godot engine mono.
 - [x] player health ui;
 - [ ] player and enemy movement fx;
 - [ ] bgm and sfx;
+  - [ ] bgm;
+  - [x] sfx.
 - [x] dialog boxes;
 - [ ] save feature.
