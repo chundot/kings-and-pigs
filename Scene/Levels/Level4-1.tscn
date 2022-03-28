@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Nodes/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -6,8 +6,7 @@
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/14-TileSets/Decorations (32x32).png" type="Texture" id=5]
 [ext_resource path="res://Scripts/CameraCtrl.cs" type="Script" id=6]
-[ext_resource path="res://Nodes/Bomb.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Nodes/Prefabs/PigInBoxE.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -592,7 +591,7 @@ points = PoolVector2Array( 32, 9.98286, 0, 9.98286, 0, 0, 32, 0 )
 2/shapes = [  ]
 2/z_index = 0
 
-[node name="Template1" type="Node2D"]
+[node name="Level4-1" type="Node2D"]
 script = ExtResource( 4 )
 NextLevel = "Level2"
 
@@ -624,9 +623,6 @@ tile_data = PoolIntArray( 458756, 0, 0 )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 154, 252 )
 
-[node name="Pig" parent="Player" instance=ExtResource( 8 )]
-position = Vector2( 277, -101 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 308, 179 )
 z_index = 20
@@ -643,13 +639,7 @@ position = Vector2( 489, 135 )
 
 [node name="Crates" type="Node" parent="."]
 
-[node name="Bomb" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 209, 250 )
-
-[node name="Bomb2" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 270, 250 )
-
-[node name="Bomb3" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 390, 154 )
-
 [node name="Enemies" type="Node" parent="."]
+
+[node name="PigInBox" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 402, 210 )

@@ -84,11 +84,8 @@ namespace kingsandpigs.Scripts.Common
 
         #region SLOTS
 
-        public virtual void OnAttackBoxEnter(Node2D body)
+        public virtual void OnAttackBoxEnter(Node2D _)
         {
-            if (body is TileMap tileMap)
-            {
-            }
         }
         public virtual void OnHitBoxEnter(Area2D area)
         {

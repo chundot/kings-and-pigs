@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Nodes/PigInBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/PigInBoxAI.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 50.5, 18.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 67, 19.5 )
+
+[node name="PigInBox" instance=ExtResource( 1 )]
+Speed = 80
+JumpForce = 220
+
+[node name="Ai" type="Node2D" parent="Anchor" index="2"]
+script = ExtResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="Anchor/Ai" index="0"]
+position = Vector2( -4, 0 )
+enabled = true
+cast_to = Vector2( 0, 12 )
+
+[node name="Detect" type="Area2D" parent="Anchor/Ai" index="1"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Ai/Detect" index="0"]
+position = Vector2( -11.5, -9.5 )
+shape = SubResource( 1 )
+
+[node name="View" type="Area2D" parent="Anchor/Ai" index="2"]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Ai/View" index="0"]
+position = Vector2( -49, -9.5 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="5"]
+visible = false
+
+[connection signal="area_entered" from="Anchor/Ai/Detect" to="Anchor/Ai" method="OnAtkRangeEntered"]
+[connection signal="area_exited" from="Anchor/Ai/Detect" to="Anchor/Ai" method="OnAtkRangeExited"]
+[connection signal="area_entered" from="Anchor/Ai/View" to="Anchor/Ai" method="OnViewRangeEntered"]
+[connection signal="area_exited" from="Anchor/Ai/View" to="Anchor/Ai" method="OnViewRangeExited"]

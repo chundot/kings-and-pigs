@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Scripts/PigAI.cs" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.5, 13.5 )
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 17, 13 )
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 92.5, 13.5 )
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 75.5, 20 )
 
 [node name="Ai" type="Node2D"]
 script = ExtResource( 2 )
@@ -21,17 +21,16 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
-position = Vector2( -5.5, -4.5 )
-shape = SubResource( 1 )
+position = Vector2( -2, -4 )
+shape = SubResource( 3 )
 
 [node name="View" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View"]
-position = Vector2( -23.5, -3.5 )
-shape = SubResource( 2 )
+position = Vector2( -27.5, -6 )
+shape = SubResource( 4 )
 
 [connection signal="area_entered" from="Detect" to="." method="OnAtkRangeEntered"]
 [connection signal="area_exited" from="Detect" to="." method="OnAtkRangeExited"]

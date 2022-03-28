@@ -4,13 +4,12 @@ using kingsandpigs.Scripts.Common;
 
 namespace kingsandpigs.Scripts
 {
-    public class PigAI : BaseAI<Pig, PigAI.State>
+    public class PigInBoxAI : BaseAI<PigInBox, PigInBoxAI.State>
     {
         private Area2D _target;
         private int _dir = 1;
         private float _wanderFactor = .8f;
         private readonly Random _rnd = new Random();
-        [Export] public bool Triggered;
         public override void _Ready()
         {
             CurState = State.Idle;
@@ -22,9 +21,7 @@ namespace kingsandpigs.Scripts
             var state = CurState switch
             {
                 State.Idle => Idle(delta),
-                State.Wander => Wander(delta),
-                State.Follow => Follow(),
-                State.TryAttack => TryAttack(),
+                State.Attack => Attack(),
                 _ => CurState
             };
             if (NextState != default)
@@ -38,46 +35,15 @@ namespace kingsandpigs.Scripts
 
         private State Idle(float delta)
         {
-            if (TransTimer < 0)
-            {
-                if (Triggered)
-                {
-                    TransTimer = _rnd.Next(2, 4);
-                    return State.Wander;
-                }
-            }
-            else
-                TransTimer -= delta;
             return CurState;
         }
-        private State Wander(float delta)
-        {
-            if (TransTimer < 0)
-            {
-                TransTimer = _rnd.Next(2, 5);
-                return State.Idle;
-            }
-            TransTimer -= delta;
-            if (Body.IsOnWall() || (Body.IsOnFloor() && !RayCast.IsColliding())) _dir = -_dir;
-            Body.MovementHandler(_dir, _wanderFactor);
-            return CurState;
-        }
-        private State Follow()
+        private State Attack()
         {
             if (_target is null)
-            {
-                TransTimer = 8f;
                 return State.Idle;
-            }
             var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
             _dir = xDelta > 0 ? -1 : 1;
-            if (Mathf.Abs(xDelta) > 4f) Body.MovementHandler(_dir);
-            if (Body.IsOnFloor() && _target.GlobalPosition.y < GlobalPosition.y)
-                if (!RayCast.IsColliding()) Body.JumpHandler();
-            return CurState;
-        }
-        private State TryAttack()
-        {
+            Body.ReadyJump(_dir);
             return CurState;
         }
 
@@ -86,29 +52,27 @@ namespace kingsandpigs.Scripts
         {
             if (IsDead) return;
             Body.CanAttack = true;
-            NextState = State.TryAttack;
+            NextState = State.Attack;
         }
 
         public void OnAtkRangeExited(Area2D _)
         {
             if (IsDead) return;
             Body.CanAttack = false;
-            NextState = State.Follow;
+            NextState = State.Idle;
         }
 
         public void OnViewRangeEntered(Area2D area)
         {
-            Triggered = true;
             if (IsDead) return;
-            Body.Dlg.Display(DlgType.ExcIn);
+            Body.NextState = PigInBox.State.LookingOut;
             _target = area;
-            NextState = State.Follow;
         }
         public void OnViewRangeExited(Area2D _)
         {
             if (IsDead) return;
             _target = null;
-            Body.Dlg.Display(DlgType.ItgIn);
+            Body.NextState = PigInBox.State.Idle;
             NextState = State.Idle;
         }
         #endregion
@@ -116,9 +80,7 @@ namespace kingsandpigs.Scripts
         {
             NoState = 0,
             Idle,
-            Wander,
-            Follow,
-            TryAttack
+            Attack
         }
     }
 }

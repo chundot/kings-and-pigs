@@ -596,7 +596,7 @@ points = PoolVector2Array( 32, 9.98286, 0, 9.98286, 0, 0, 32, 0 )
 2/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=82]
-extents = Vector2( 15.5, 2.5 )
+extents = Vector2( 16, 2.5 )
 
 [sub_resource type="Animation" id=83]
 resource_name = "In"
