@@ -10,12 +10,14 @@ namespace kingsandpigs.Scripts
         private int _jmpDir = 1;
         public override void _Ready()
         {
+            AtkCD = -.1f;
             base._Ready();
             TransTo(State.Idle);
         }
 
         protected override void StateUpdate(float delta)
         {
+            AtkCD -= delta;
             var state = CurState switch
             {
                 State.Idle => Idle(),
@@ -81,6 +83,8 @@ namespace kingsandpigs.Scripts
         {
             if (CurState is State.Idle or State.LookingOut)
             {
+                if (AtkCD > 0f) return;
+                AtkCD = 1.6f;
                 _jmpDir = dir;
                 NextState = State.BeforeJump;
             }

@@ -8,6 +8,9 @@ namespace kingsandpigs.Scripts
     {
         private Area2D _target;
         private int _dir = 1;
+        private float _timer = 2f;
+        private Random _rnd = new();
+        [Export] public bool Triggered;
         public override void _Ready()
         {
             CurState = State.Idle;
@@ -31,8 +34,23 @@ namespace kingsandpigs.Scripts
                 CurState = state;
         }
 
-        private State Idle(float _)
+        private State Idle(float delta)
         {
+            if (!Triggered) return CurState;
+            if (_timer > 0) _timer -= delta;
+            else
+            {
+                if (Body.CurState is PigInBox.State.LookingOut)
+                {
+                    Body.NextState = PigInBox.State.Idle;
+                    _timer = _rnd.Next(4, 8);
+                }
+                else if (Body.CurState is PigInBox.State.Idle)
+                {
+                    Body.NextState = PigInBox.State.LookingOut;
+                    _timer = _rnd.Next(2, 4);
+                }
+            }
             return CurState;
         }
         private State Attack()
@@ -63,6 +81,7 @@ namespace kingsandpigs.Scripts
         public void OnViewRangeEntered(Area2D area)
         {
             if (IsDead) return;
+            NextState = State.Alert;
             Body.NextState = PigInBox.State.LookingOut;
             _target = area;
         }
@@ -72,12 +91,14 @@ namespace kingsandpigs.Scripts
             _target = null;
             Body.NextState = PigInBox.State.Idle;
             NextState = State.Idle;
+            Triggered = true;
         }
         #endregion
         public enum State
         {
             NoState = 0,
             Idle,
+            Alert,
             Attack
         }
     }

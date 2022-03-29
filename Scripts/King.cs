@@ -53,7 +53,7 @@ public class King : BaseStatedBody<King.State>
         if (IsOnFloor()) return State.Idle;
         if (Velocity.y > 0)
         {
-            FallTimer = .1f;
+            FallTimer = .2f;
             return State.Fall;
         }
         return CurState;
@@ -67,7 +67,7 @@ public class King : BaseStatedBody<King.State>
         if (IsOnFloor()) return State.Run;
         if (Velocity.y > 0)
         {
-            FallTimer = .1f;
+            FallTimer = .2f;
             return State.Fall;
         }
         return CurState;
@@ -136,8 +136,8 @@ public class King : BaseStatedBody<King.State>
 
     public bool JumpHandler()
     {
-        if (CurState is State.Fall || FallTimer <= 0f)
-            if (!IsOnFloor()) return false;
+        if (!IsOnFloor())
+            if (!(CurState is State.Fall && FallTimer > 0f)) return false;
         _jump.Play();
         var factor = 1f;
         NextState = State.Jump;
