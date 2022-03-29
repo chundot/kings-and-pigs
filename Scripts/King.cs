@@ -140,6 +140,7 @@ public class King : BaseStatedBody<King.State>
             if (!(CurState is State.Fall && FallTimer > 0f)) return false;
         _jump.Play();
         var factor = 1f;
+        if (NextState is State.Hit) return false;
         NextState = State.Jump;
         Velocity.y = -JumpForce * factor;
         GravityTimer = .3f;

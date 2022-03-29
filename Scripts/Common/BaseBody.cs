@@ -115,6 +115,11 @@ namespace kingsandpigs.Scripts.Common
                 h.ToHit();
                 OnHealthChange(Health + 1, Health);
             }
+            else if (body is TileMap tile)
+            {
+                if (tile.GetCollisionLayerBit(3) && Mathf.Abs(Velocity.y) > 8)
+                    HealthChange(1);
+            }
         }
 
         #endregion
