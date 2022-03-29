@@ -62,6 +62,7 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
+shortcut_in_tooltip = false
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -83,6 +84,7 @@ custom_styles/pressed = ExtResource( 4 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
+shortcut_in_tooltip = false
 text = "Continue"
 __meta__ = {
 "_edit_use_anchors_": false
