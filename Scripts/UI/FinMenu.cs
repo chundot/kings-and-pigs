@@ -15,6 +15,7 @@ public class FinMenu : Control
         _trans = GetChild<SceneTrans>(1);
         _sfx = GetChild<SfxMgr>(2);
         _trans.OnInStop += () => GlobalVar.Diamond = 0;
+        SaveLoad.Save();
     }
 
     public void OnMenu()
@@ -31,6 +32,7 @@ public class FinMenu : Control
         _pressed = true;
         _sfx.Play("Click");
         GlobalVar.CurLevel += 1;
+        SaveLoad.Save();
         _trans.OnInStop += () => GetTree().ChangeScene($"res://Scene/Levels/Level{GlobalVar.CurLevel}-1.tscn");
         _trans.TransIn();
     }

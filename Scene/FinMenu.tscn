@@ -13,12 +13,12 @@
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.247059, 0.219608, 0.317647, 0.862745 )
 
-[sub_resource type="InputEventAction" id=2]
+[sub_resource type="InputEventAction" id=6]
 action = "jump"
 pressed = true
 
 [sub_resource type="ShortCut" id=3]
-shortcut = SubResource( 2 )
+shortcut = SubResource( 6 )
 
 [sub_resource type="InputEventAction" id=4]
 action = "pause"

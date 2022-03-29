@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using kingsandpigs.Scripts.Common;
 
 public class MainMenu : Control
 {
@@ -7,6 +8,7 @@ public class MainMenu : Control
     private SfxMgr _sfx;
     public override void _Ready()
     {
+        SaveLoad.Load();
         GetTree().Paused = false;
         _trans = GetChild<SceneTrans>(1);
         _sfx = GetChild<SfxMgr>(2);
@@ -21,6 +23,8 @@ public class MainMenu : Control
     public void OnContinue()
     {
         _sfx.Play("Click");
+        _trans.OnInStop += () => GetTree().ChangeScene($"res://Scene/Levels/Level{GlobalVar.CurLevel}-1.tscn");
+        _trans.TransIn();
     }
 
     public void OnHover()
