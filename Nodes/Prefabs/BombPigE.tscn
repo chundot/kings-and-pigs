@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Nodes/BombPig.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/BombPigAI.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 75.5, 14 )
+
+[node name="BombPigE" instance=ExtResource( 1 )]
+
+[node name="Ai" type="Node2D" parent="Anchor" index="2"]
+script = ExtResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="Anchor/Ai" index="0"]
+position = Vector2( -4, 0 )
+enabled = true
+cast_to = Vector2( 0, 12 )
+collision_mask = 33
+
+[node name="View" type="Area2D" parent="Anchor/Ai" index="1"]
+collision_layer = 0
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/Ai/View" index="0"]
+position = Vector2( -27.5, -12 )
+shape = SubResource( 4 )
+
+[connection signal="area_entered" from="Anchor/Ai/View" to="Anchor/Ai" method="OnViewRangeEntered"]
+[connection signal="area_exited" from="Anchor/Ai/View" to="Anchor/Ai" method="OnViewRangeExited"]

@@ -9,7 +9,7 @@ public class LevelManager : Node2D
     [Export] public string NextLevel;
     public override void _Ready()
     {
-        _hud = GD.Load<PackedScene>("res://Nodes/HUD/LevelHUD.tscn").Instance<LevelHUDManager>();
+        _hud = Scenes.LevelHUD.Instance<LevelHUDManager>();
         AddChild(_hud);
         _hud.OnNextLevel += GoNextLevel;
         _player = GetNode<KingController>("Player");

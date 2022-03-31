@@ -1,3 +1,5 @@
+using Godot;
+
 namespace kingsandpigs.Scripts.Common
 {
     public static class GlobalVar
@@ -6,5 +8,6 @@ namespace kingsandpigs.Scripts.Common
         public static int UnlockedLevel = 1;
         public static int CurLevel = 1;
         public static int LevelNum = 6;
+
     }
 }

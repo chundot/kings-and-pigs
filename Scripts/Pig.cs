@@ -6,6 +6,7 @@ namespace kingsandpigs.Scripts
 {
     public class Pig : BaseStatedBody<Pig.State>
     {
+        public bool Dmged;
         public override void _Ready()
         {
             Speed = 160;
@@ -13,6 +14,7 @@ namespace kingsandpigs.Scripts
             base._Ready();
             OnHealthChange += (newVal, oldVal) => NextState = newVal < oldVal ? State.Hit : NextState;
             TransTo(State.Idle);
+            if (Dmged) InvincibleTimer = -.1f;
         }
 
         protected override void StateUpdate(float delta)

@@ -93,11 +93,10 @@ namespace kingsandpigs.Scripts
         private void GenerateFragments()
         {
             var rnd = new Random();
-            var frag = GD.Load<PackedScene>("res://Nodes/Crate/CrateFrag.tscn");
             var parent = GetParent();
             for (var i = 0; i < 4; i++)
             {
-                var node = frag.Instance<CrateFrag>();
+                var node = Scenes.Frag.Instance<CrateFrag>();
                 node.GlobalPosition = GlobalPosition;
                 node.Set(i, Vector2.Right * _dir * rnd.Next(150, 240) + Vector2.Up * rnd.Next(80, 150));
                 parent.AddChild(node);
@@ -106,9 +105,8 @@ namespace kingsandpigs.Scripts
 
         private void GeneratePig()
         {
-            var pig = GD.Load<PackedScene>("res://Nodes/Prefabs/PigE.tscn");
             var parent = GetParent();
-            var pigI = pig.Instance<Pig>();
+            var pigI = Scenes.Pig.Instance<Pig>();
             pigI.GlobalPosition = GlobalPosition + Vector2.Up * 2;
             parent.AddChild(pigI);
         }
@@ -120,7 +118,7 @@ namespace kingsandpigs.Scripts
             {
                 State.Ground => State.Idle,
                 State.BeforeJump => State.Jump,
-                _ => CurState
+                _ => NextState
             };
             if (state is State.Hit)
             {

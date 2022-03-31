@@ -152,7 +152,7 @@ public class King : BaseStatedBody<King.State>
         if (Input.IsActionJustPressed("attack"))
         {
             TransTo(State.Attack);
-            Velocity += -SpriteAnchor.Scale.x * Speed * 1.2f * Vector2.Right;
+            Velocity += -SpriteAnchor.Scale.x * Speed * Vector2.Right;
             return true;
         }
 

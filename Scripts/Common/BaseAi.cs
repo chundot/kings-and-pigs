@@ -10,7 +10,6 @@ namespace kingsandpigs.Scripts.Common
         protected TState CurState = default;
         protected TState NextState;
         protected bool IsDead = false;
-
         protected float TransTimer = 1f;
         public override void _Ready()
         {
