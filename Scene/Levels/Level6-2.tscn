@@ -721,11 +721,11 @@ position = Vector2( 320, 100 )
 [node name="Crates" type="Node" parent="."]
 
 [node name="Crate" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 206, 280 )
+position = Vector2( 206, 281 )
 FaceRight = true
 
 [node name="Crate2" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 209, 264 )
+position = Vector2( 209, 266 )
 
 [node name="Crate3" parent="Crates" instance=ExtResource( 7 )]
 position = Vector2( 405, 184 )

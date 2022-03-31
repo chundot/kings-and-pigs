@@ -644,7 +644,7 @@ z_index = 2
 tile_set = SubResource( 72 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( 196612, 0, 0 )
+tile_data = PoolIntArray( 196612, 0, 0, 458760, 2, 0, 458763, 2, 0, 524296, 2, 196608, 524299, 2, 196608 )
 
 [node name="Spike" type="TileMap" parent="Tile"]
 z_index = 25
@@ -684,10 +684,10 @@ position = Vector2( 163, 259 )
 position = Vector2( 143, 184 )
 
 [node name="Crate2" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 495, 184 )
+position = Vector2( 495, 185 )
 
 [node name="Crate3" parent="Crates" instance=ExtResource( 7 )]
-position = Vector2( 493, 168 )
+position = Vector2( 491, 170 )
 FaceRight = true
 
 [node name="Enemies" type="Node" parent="."]

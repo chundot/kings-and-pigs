@@ -8,12 +8,21 @@ namespace Godot
         {
             return obj.GetCollisionLayerBit(layer.GetHashCode());
         }
-
-        public static bool SetLayerBit(this CollisionObject2D obj, LayerEnum layer)
+        public static void DisLayerBit(this CollisionObject2D obj, LayerEnum layer)
         {
-            var tmp = !obj.GetLayerBit(layer);
-            obj.SetCollisionLayerBit(layer.GetHashCode(), tmp);
-            return tmp;
+            obj.SetCollisionLayerBit(layer.GetHashCode(), false);
+        }
+        public static void EnLayerBit(this CollisionObject2D obj, LayerEnum layer)
+        {
+            obj.SetCollisionLayerBit(layer.GetHashCode(), true);
+        }
+        public static void DisMaskBit(this CollisionObject2D obj, LayerEnum layer)
+        {
+            obj.SetCollisionMaskBit(layer.GetHashCode(), false);
+        }
+        public static void EnMaskBit(this CollisionObject2D obj, LayerEnum layer)
+        {
+            obj.SetCollisionMaskBit(layer.GetHashCode(), true);
         }
     }
 }

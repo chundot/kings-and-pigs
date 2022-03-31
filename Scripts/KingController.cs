@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using kingsandpigs.Scripts;
 using kingsandpigs.Scripts.Common;
 
 public class KingController : PlayerController<King>
@@ -17,6 +18,7 @@ public class KingController : PlayerController<King>
     {
         base._PhysicsProcess(delta);
         if (Body.Health == 0) return;
+        if (Input.IsActionJustPressed("sayhi")) Body.Dlg.Display(DlgType.HiIn);
         if (CanEnterDoor && Input.IsActionJustPressed("enter_door"))
             Body.NextState = King.State.DoorIn;
         // Movement

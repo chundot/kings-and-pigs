@@ -10,7 +10,7 @@ namespace kingsandpigs.Scripts
         private bool _trigger;
         private readonly Random _rnd = new();
         private Area2D _target;
-        private float _aimTimer = 1f;
+        private float _aimTimer = .8f;
         public override void _Ready()
         {
             CurState = State.Idle;
@@ -82,9 +82,10 @@ namespace kingsandpigs.Scripts
             Body.Dlg.Display(DlgType.ExcIn);
             NextState = State.Attack;
         }
-        public void OnViewRangeExited(Area2D area)
+        public void OnViewRangeExited(Area2D _)
         {
-            if (_aimTimer < .6f) return;
+            if (_aimTimer < .7f) return;
+            _aimTimer = .8f;
             Body.Dlg.Display(DlgType.ItgIn);
             NextState = State.Idle;
         }

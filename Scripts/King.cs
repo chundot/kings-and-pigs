@@ -19,7 +19,6 @@ public class King : BaseStatedBody<King.State>
 
     protected override void StateUpdate(float delta)
     {
-        if (Input.IsActionJustPressed("sayhi")) Dlg.Display(DlgType.HiIn);
         var state = CurState switch
         {
             State.Idle => Idle(),

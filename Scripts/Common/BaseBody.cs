@@ -17,7 +17,7 @@ namespace kingsandpigs.Scripts.Common
         protected AnimationPlayer Player;
         public DlgBox Dlg;
         protected float InvincibleTimer = .4f;
-        protected float AtkCD = 1f;
+        protected float AtkCD = .4f;
         protected float FallTimer = -.1f;
         public float GravityTimer = -.1f;
         protected Node2D Info;
@@ -37,8 +37,9 @@ namespace kingsandpigs.Scripts.Common
             OnDeath += () =>
             {
                 if (KilledBy is not null) KilledBy.Dlg.Display(DlgType.LoserIn);
-                this.SetLayerBit(LayerEnum.Rb);
-                this.SetLayerBit(LayerEnum.DeadBody);
+                this.DisLayerBit(LayerEnum.Rb);
+                this.DisMaskBit(LayerEnum.Rb);
+                this.EnLayerBit(LayerEnum.DeadBody);
                 GetNode<CollisionShape2D>("HitBox/CollisionShape2D").Disabled = true;
             };
         }
@@ -96,7 +97,10 @@ namespace kingsandpigs.Scripts.Common
                 HealthChange(1);
                 Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed * 1.5f + Vector2.Up * JumpForce / 2.5f;
                 if (Health == 0)
-                    KilledBy = area.GetParent<Position2D>().GetParent<BaseBody>();
+                {
+                    if (area.GetParent<Node2D>() is Position2D pos)
+                        KilledBy = pos.GetParent<BaseBody>();
+                }
                 else Dlg.Display(DlgType.WtfIn);
             }
         }

@@ -7,7 +7,7 @@ namespace kingsandpigs.Scripts.Common
         public static int Diamond = 0;
         public static int UnlockedLevel = 1;
         public static int CurLevel = 1;
-        public static int LevelNum = 6;
+        public static int LevelNum = 7;
 
     }
 }
