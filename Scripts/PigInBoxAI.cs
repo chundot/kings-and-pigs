@@ -14,8 +14,8 @@ namespace kingsandpigs.Scripts
         public override void _Ready()
         {
             CurState = State.Idle;
-            RayCast.Enabled = false;
             base._Ready();
+            RayCast.Enabled = false;
         }
 
         protected override void StateUpdate(float delta)
