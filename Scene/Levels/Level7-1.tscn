@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Nodes/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/05-Pig Thowing a Bomb/Idle (26x26).png" type="Texture" id=11]
 [ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Nodes/PigInBox.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -896,16 +897,6 @@ one_way_collision = true
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 154, 252 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 308, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 4.0
-
 [node name="Exit" parent="." instance=ExtResource( 1 )]
 position = Vector2( 161, 132 )
 
@@ -940,6 +931,8 @@ scale = Vector2( -1, 1 )
 
 [node name="PigInBox" parent="Enemies" instance=ExtResource( 13 )]
 position = Vector2( 207, 152 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 14 )]
 
 [editable path="Enemies/BombPigE2"]
 [editable path="Enemies/Pig"]

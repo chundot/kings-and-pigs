@@ -93,6 +93,7 @@ namespace kingsandpigs.Scripts.Common
             var isDmgFromAttack = area.GetLayerBit(LayerEnum.AttackBox);
             if (isDmgFromAttack && InvincibleTimer <= 0)
             {
+                GlobalEvent.CameraShake?.Invoke(.08f, 4);
                 InvincibleTimer = 0.3f;
                 HealthChange(1);
                 Velocity = (Vector2.Right * (GlobalPosition.x - area.GlobalPosition.x)).Normalized() * Speed * 1.5f + Vector2.Up * JumpForce / 2.5f;

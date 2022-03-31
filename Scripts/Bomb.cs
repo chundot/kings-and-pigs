@@ -56,6 +56,8 @@ public class Bomb : RigidBody2D
     {
         if (state is State.On) _dir.Enable();
         _curState = state;
+        if (_curState is State.Boom)
+            GlobalEvent.CameraShake?.Invoke(.15f, 8);
         _player.Play(state.ToString());
     }
 

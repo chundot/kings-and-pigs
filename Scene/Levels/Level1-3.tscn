@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Nodes/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/14-TileSets/Decorations (32x32).png" type="Texture" id=5]
 [ext_resource path="res://Nodes/HUD/TipAtk.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/Pig.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -623,15 +624,7 @@ tile_data = PoolIntArray( 393220, 2, 0, 393231, 2, 0, 458756, 2, 131072, 458759,
 position = Vector2( 455, 275 )
 Entering = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 308, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 4.0
+[node name="Camera2D" parent="." instance=ExtResource( 7 )]
 
 [node name="Entry" parent="." instance=ExtResource( 1 )]
 position = Vector2( 455, 260 )

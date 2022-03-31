@@ -139,6 +139,7 @@ namespace kingsandpigs.Scripts
             var isDmgFromAttack = area.GetLayerBit(LayerEnum.AttackBox);
             if (isDmgFromAttack && area.Name != "BoxAtkBox")
             {
+                GlobalEvent.CameraShake?.Invoke(.08f, 4);
                 _dir = area.GlobalPosition.x > GlobalPosition.x ? -1 : 1;
                 TransTo(State.Hit);
             }

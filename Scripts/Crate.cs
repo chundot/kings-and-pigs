@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using kingsandpigs.Scripts.Common;
 
 public class Crate : RigidBody2D
 {
@@ -16,6 +17,7 @@ public class Crate : RigidBody2D
 
     public void ToHit()
     {
+        GlobalEvent.CameraShake?.Invoke(.08f, 4);
         _sprite.Play("Hit");
         _audio.Play();
     }

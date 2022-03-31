@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/14-TileSets/Terrain (32x32).png" type="Texture" id=3]
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/14-TileSets/Decorations (32x32).png" type="Texture" id=5]
-[ext_resource path="res://Scripts/CameraCtrl.cs" type="Script" id=6]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Nodes/Crate/Crate.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/03-Pig/Ground (34x28).png" type="Texture" id=9]
@@ -2824,17 +2824,6 @@ one_way_collision = true
 position = Vector2( 481, 115 )
 Entering = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 308, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 4.0
-script = ExtResource( 6 )
-
 [node name="Entry" parent="." instance=ExtResource( 1 )]
 position = Vector2( 481, 100 )
 IsEntry = true
@@ -2944,6 +2933,8 @@ position = Vector2( 221, 279 )
 
 [node name="Pig7" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( 296, 247 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
 
 [editable path="Enemies/Pig"]
 [editable path="Enemies/Pig2"]

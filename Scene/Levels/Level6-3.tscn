@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=67 format=2]
 
 [ext_resource path="res://Nodes/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Nodes/Crate/Crate.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Nodes/Prefabs/PigInBoxE.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -661,16 +662,6 @@ tile_data = PoolIntArray( 196619, 0, 0, 327685, 1073741824, 0, 327687, 107374182
 position = Vector2( 320, 115 )
 Entering = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 308, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 4.0
-
 [node name="Entry" parent="." instance=ExtResource( 1 )]
 position = Vector2( 320, 100 )
 IsEntry = true
@@ -700,3 +691,5 @@ position = Vector2( 304, 279 )
 
 [node name="PigInBox" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( 498, 281 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]

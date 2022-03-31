@@ -6,7 +6,7 @@
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/14-TileSets/Decorations (32x32).png" type="Texture" id=5]
 [ext_resource path="res://Nodes/Crate/Crate.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scripts/CameraCtrl.cs" type="Script" id=7]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/Prefabs/PigInBoxE.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Nodes/Prefabs/PigE.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/03-Pig/Idle (34x28).png" type="Texture" id=10]
@@ -2271,14 +2271,7 @@ one_way_collision = true
 position = Vector2( 472, 211 )
 Entering = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -204, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-smoothing_enabled = true
-smoothing_speed = 4.0
-script = ExtResource( 7 )
+[node name="Camera2D" parent="." instance=ExtResource( 7 )]
 
 [node name="Entry" parent="." instance=ExtResource( 1 )]
 position = Vector2( 472, 196 )
