@@ -7,6 +7,7 @@ namespace kingsandpigs.Scripts
     public class BombPigAI : BaseAI<BombPig, BombPigAI.State>
     {
         [Export] public int Dir = -1;
+        private bool _trigger;
         private readonly Random _rnd = new();
         private Area2D _target;
         private float _aimTimer = 1f;
@@ -36,7 +37,7 @@ namespace kingsandpigs.Scripts
 
         private State Idle(float delta)
         {
-            if (TransTimer < 0)
+            if (TransTimer < 0 && _trigger)
             {
                 TransTimer = _rnd.Next(2, 4);
                 return State.Wander;
@@ -76,6 +77,7 @@ namespace kingsandpigs.Scripts
 
         public void OnViewRangeEntered(Area2D area)
         {
+            _trigger = true;
             _target = area;
             Body.Dlg.Display(DlgType.ExcIn);
             NextState = State.Attack;

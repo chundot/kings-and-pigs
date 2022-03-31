@@ -112,10 +112,10 @@ namespace kingsandpigs.Scripts
             Velocity.x = Mathf.Lerp(Velocity.x, dir * Speed * factor, 0.2f);
         }
 
-        public void JumpHandler()
+        public void JumpHandler(float factor = 1f)
         {
-            if (CurState is State.Hit or State.Dead) return;
-            Velocity.y = -JumpForce;
+            if (CurState is State.Hit or State.Dead or State.Jump or State.Fall) return;
+            Velocity.y = -JumpForce * factor;
             NextState = State.Jump;
         }
 

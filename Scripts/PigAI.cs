@@ -11,6 +11,7 @@ namespace kingsandpigs.Scripts
         private readonly float _wanderFactor = .8f;
         private readonly Random _rnd = new();
         [Export] public bool Triggered;
+        private float _followTimer = 4f;
         public override void _Ready()
         {
             CurState = State.Idle;
@@ -23,7 +24,7 @@ namespace kingsandpigs.Scripts
             {
                 State.Idle => Idle(delta),
                 State.Wander => Wander(delta),
-                State.Follow => Follow(),
+                State.Follow => Follow(delta),
                 State.TryAttack => TryAttack(),
                 _ => CurState
             };
@@ -62,24 +63,27 @@ namespace kingsandpigs.Scripts
             Body.MovementHandler(_dir, _wanderFactor);
             return CurState;
         }
-        private State Follow()
+        private State Follow(float delta)
         {
-            if (_target is null)
+            if (_target is null || _followTimer < 0)
             {
                 TransTimer = 8f;
                 return State.Idle;
             }
+            _followTimer -= delta;
             var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
             _dir = xDelta > 0 ? -1 : 1;
             if (Mathf.Abs(xDelta) > 4f) Body.MovementHandler(_dir);
             if (Body.IsOnFloor() && _target.GlobalPosition.y - 32 < GlobalPosition.y)
                 if (!RayCast.IsColliding()) Body.JumpHandler();
+            if (Body.IsOnWall()) Body.JumpHandler(1.2f);
             return CurState;
         }
         private State TryAttack()
         {
             if (_target != null)
             {
+                _followTimer = 4f;
                 var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
                 _dir = xDelta > 0 ? -1 : 1;
                 Body.MovementHandler(_dir, 0);
@@ -112,6 +116,7 @@ namespace kingsandpigs.Scripts
         }
         public void OnViewRangeExited(Area2D _)
         {
+            _followTimer = 4f;
             if (IsDead) return;
             _target = null;
             Body.Dlg.Display(DlgType.ItgIn);

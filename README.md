@@ -23,7 +23,7 @@ you can try it on: https://chundot.itch.io/kings-and-pigs
   - [x] normal pig;
   - [ ] crate pig;
   - [x] pig in crate;
-  - [ ] bomb pig;
+  - [x] bomb pig;
   - [ ] pig with march;
   - [ ] pig king.
 - [x] player controller optimization;

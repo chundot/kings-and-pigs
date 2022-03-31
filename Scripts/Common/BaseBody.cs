@@ -10,7 +10,7 @@ namespace kingsandpigs.Scripts.Common
         public bool CanAttack = false;
         protected Vector2 Velocity = Vector2.Zero;
         protected int Gravity = 12;
-        protected int MaxFallSpeed = 360;
+        protected int MaxFallSpeed = 420;
         [Export] protected int Speed = 120;
         [Export] protected int JumpForce = 280;
         protected Position2D SpriteAnchor;
@@ -67,7 +67,7 @@ namespace kingsandpigs.Scripts.Common
                 GravityTimer -= delta;
             }
             else val += Gravity;
-            Velocity.y = Mathf.Clamp(val, -JumpForce, MaxFallSpeed);
+            Velocity.y = Mathf.Clamp(val, -JumpForce * 2, MaxFallSpeed);
         }
 
         protected void SpeedHandler(float factor = 0.2f)
