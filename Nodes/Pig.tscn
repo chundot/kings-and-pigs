@@ -499,6 +499,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [ PoolVector2Array( -17, -15, -15, -17, -12, -17, -11, -16, -11, -12, -13, -4, -9, 3, -14, 3, -17, -1, -19, -5, -19, -11 ) ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("SpriteAnchor/AttackBox/CollisionPolygon2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=54]
 resource_name = "Run"

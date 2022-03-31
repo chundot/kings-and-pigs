@@ -72,7 +72,7 @@ namespace kingsandpigs.Scripts
             var xDelta = GlobalPosition.x - _target.GlobalPosition.x;
             _dir = xDelta > 0 ? -1 : 1;
             if (Mathf.Abs(xDelta) > 4f) Body.MovementHandler(_dir);
-            if (Body.IsOnFloor() && _target.GlobalPosition.y < GlobalPosition.y)
+            if (Body.IsOnFloor() && _target.GlobalPosition.y - 32 < GlobalPosition.y)
                 if (!RayCast.IsColliding()) Body.JumpHandler();
             return CurState;
         }

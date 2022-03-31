@@ -109,7 +109,7 @@ namespace kingsandpigs.Scripts
             var pig = GD.Load<PackedScene>("res://Nodes/Prefabs/PigE.tscn");
             var parent = GetParent();
             var pigI = pig.Instance<Pig>();
-            pigI.GlobalPosition = GlobalPosition;
+            pigI.GlobalPosition = GlobalPosition + Vector2.Up * 2;
             parent.AddChild(pigI);
         }
 

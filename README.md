@@ -18,7 +18,7 @@ you can try it on: https://chundot.itch.io/kings-and-pigs
 - [ ] level design;
   - [x] tilemap;
   - [x] one-way through platform;
-  - [ ] at least 5 levels.
+  - [ ] at least 10 levels.
 - [ ] enemy ai;
   - [x] normal pig;
   - [ ] crate pig;
@@ -39,4 +39,4 @@ you can try it on: https://chundot.itch.io/kings-and-pigs
   - [ ] bgm;
   - [x] sfx.
 - [x] dialog boxes;
-- [ ] save feature.
+- [x] save feature.
