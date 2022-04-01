@@ -107,6 +107,7 @@ namespace kingsandpigs.Scripts
         {
             var parent = GetParent();
             var pigI = Scenes.Pig.Instance<Pig>();
+            pigI.FaceDir = SpriteAnchor.Scale.x > 0;
             pigI.GlobalPosition = GlobalPosition + Vector2.Up * 2;
             parent.AddChildDefered(pigI);
         }

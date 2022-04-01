@@ -2,18 +2,26 @@
 
 ## Introduction
 
-a platformer game based on godot engine mono.
+A platformer game based on godot engine mono.
 
-you can try it on: https://chundot.itch.io/kings-and-pigs
+You can try it on: https://chundot.itch.io/kings-and-pigs
+
+## Build Environment
+
+- Godot Mono 3.4.2
+- .NET 6 SDK
 
 ## Todos
 
 - [ ] game ui;
   - [x] main menu;
   - [x] select level;
-  - [x] level finished;
+  - [ ] level finished;
+    - [x] simple next level;
+    - [ ] statistic ui.
   - [ ] death menu;
     - [x] reset tip when dying.
+    - [ ] killed by...
   - [x] pause menu.
 - [ ] level design;
   - [x] tilemap;

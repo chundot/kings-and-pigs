@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Nodes/Door.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scripts/LevelManager.cs" type="Script" id=4]
 [ext_resource path="res://Assets/14-TileSets/Decorations (32x32).png" type="Texture" id=5]
 [ext_resource path="res://Assets/14-TileSets/Spikes.png" type="Texture" id=6]
+[ext_resource path="res://Nodes/Camera2D.tscn" type="PackedScene" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -618,7 +619,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 19.7916, 0, 19.8565 )
 
 [node name="Template2" type="Node2D"]
 script = ExtResource( 4 )
-NextLevel = "Level2"
+NextLevel = "Level2-1"
 
 [node name="Tile" type="Node" parent="."]
 
@@ -656,16 +657,6 @@ format = 1
 position = Vector2( 473, 275 )
 Entering = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 308, 179 )
-z_index = 20
-current = true
-zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 4.0
-
 [node name="Entry" parent="." instance=ExtResource( 1 )]
 position = Vector2( 473, 260 )
 IsEntry = true
@@ -676,3 +667,5 @@ position = Vector2( 232, 260 )
 [node name="Crates" type="Node" parent="."]
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Camera2D" parent="." instance=ExtResource( 7 )]

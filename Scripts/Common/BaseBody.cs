@@ -6,7 +6,8 @@ namespace kingsandpigs.Scripts.Common
     public class BaseBody : KinematicBody2D
     {
         [Export] public int MaxHealth = 3;
-        [Export] public bool Triggered = false;
+        [Export] public bool Triggered;
+        [Export] public bool FaceDir;
         public int Health = 3;
         public bool CanAttack = false;
         protected Vector2 Velocity = Vector2.Zero;
@@ -31,6 +32,7 @@ namespace kingsandpigs.Scripts.Common
         {
             Health = MaxHealth;
             SpriteAnchor = GetChild<Position2D>(0);
+            SpriteAnchor.Scale = new Vector2(FaceDir ? 1 : -1, 1);
             Dlg = GetChild<DlgBox>(4);
             Player = GetChild<AnimationPlayer>(1);
             Info = GetChild<Node2D>(2);
@@ -124,13 +126,14 @@ namespace kingsandpigs.Scripts.Common
             else if (body is TileMap tile)
             {
                 if (tile.GetCollisionLayerBit(3) && Mathf.Abs(Velocity.y) > 8)
+                {
+                    GlobalEvent.CameraShake?.Invoke(.08f, 4);
                     HealthChange(1);
+                }
             }
         }
 
-        public virtual void OnHitBoxExited(Area2D area)
-        {
-        }
+        public virtual void OnHitBoxExited(Area2D area) { }
 
         #endregion
 

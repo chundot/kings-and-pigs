@@ -73,6 +73,7 @@ namespace kingsandpigs.Scripts
         {
             var parent = GetParent();
             var pigI = Scenes.Pig.Instance<Pig>();
+            pigI.FaceDir = SpriteAnchor.Scale.x > 0;
             pigI.GlobalPosition = GlobalPosition;
             parent.CallDeferred("add_child", pigI);
             QueueFree();
@@ -98,6 +99,7 @@ namespace kingsandpigs.Scripts
                 pigI.GlobalPosition = GlobalPosition;
                 bombI.GlobalPosition = GlobalPosition;
                 pigI.Dmged = true;
+                pigI.FaceDir = SpriteAnchor.Scale.x < 0;
                 parent.CallDeferred("add_child", pigI);
                 parent.CallDeferred("add_child", bombI);
                 QueueFree();
