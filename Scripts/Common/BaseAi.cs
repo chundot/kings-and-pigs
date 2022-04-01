@@ -11,9 +11,11 @@ namespace kingsandpigs.Scripts.Common
         protected TState NextState;
         protected bool IsDead = false;
         protected float TransTimer = 1f;
+        protected bool Triggered;
         public override void _Ready()
         {
             Body = GetParent<Position2D>().GetParent<TBody>();
+            Triggered = Body.Triggered;
             Body.OnDeath += () =>
             {
                 QueueFree();

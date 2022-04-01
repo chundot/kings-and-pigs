@@ -10,7 +10,7 @@ namespace kingsandpigs.Scripts
         private int _dir = 1;
         private readonly float _wanderFactor = .8f;
         private readonly Random _rnd = new();
-        [Export] public bool Triggered;
+
         private float _followTimer = 4f;
         public override void _Ready()
         {
@@ -59,6 +59,7 @@ namespace kingsandpigs.Scripts
                 return State.Idle;
             }
             TransTimer -= delta;
+            Body.PickHandler();
             if (Body.IsOnWall() || (Body.IsOnFloor() && !RayCast.IsColliding())) _dir = -_dir;
             Body.MovementHandler(_dir, _wanderFactor);
             return CurState;
@@ -92,11 +93,22 @@ namespace kingsandpigs.Scripts
         }
 
         #region SLOTS
-        public void OnAtkRangeEntered(Area2D _)
+        public void OnAtkRangeEntered(Area2D area)
         {
             if (IsDead) return;
-            Body.CanAttack = true;
-            NextState = State.TryAttack;
+            if (area.GetParent<Node2D>() is Bomb)
+            {
+                if (CurState is State.Follow)
+                {
+                    Body.CanAttack = true;
+                    NextState = State.TryAttack;
+                }
+            }
+            else if (area.GetLayerBit(LayerEnum.PlayerHitBox))
+            {
+                Body.CanAttack = true;
+                NextState = State.TryAttack;
+            }
         }
 
         public void OnAtkRangeExited(Area2D _)

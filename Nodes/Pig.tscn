@@ -648,3 +648,4 @@ __meta__ = {
 [connection signal="body_entered" from="SpriteAnchor/AttackBox" to="." method="OnAttackBoxEnter"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="AnimationFinished"]
 [connection signal="area_entered" from="HitBox" to="." method="OnHitBoxEnter"]
+[connection signal="area_exited" from="HitBox" to="." method="OnHitBoxExited"]

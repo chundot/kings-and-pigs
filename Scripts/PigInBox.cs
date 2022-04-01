@@ -99,7 +99,7 @@ namespace kingsandpigs.Scripts
                 var node = Scenes.Frag.Instance<CrateFrag>();
                 node.GlobalPosition = GlobalPosition;
                 node.Set(i, Vector2.Right * _dir * rnd.Next(150, 240) + Vector2.Up * rnd.Next(80, 150));
-                parent.AddChild(node);
+                parent.AddChildDefered(node);
             }
         }
 
@@ -108,7 +108,7 @@ namespace kingsandpigs.Scripts
             var parent = GetParent();
             var pigI = Scenes.Pig.Instance<Pig>();
             pigI.GlobalPosition = GlobalPosition + Vector2.Up * 2;
-            parent.AddChild(pigI);
+            parent.AddChildDefered(pigI);
         }
 
         public void OnAnimationFinished(string name)

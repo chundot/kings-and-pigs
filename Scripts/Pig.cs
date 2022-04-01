@@ -7,6 +7,7 @@ namespace kingsandpigs.Scripts
     public class Pig : BaseStatedBody<Pig.State>
     {
         public bool Dmged;
+        public Bomb BombObj;
         public override void _Ready()
         {
             Speed = 160;
@@ -119,6 +120,16 @@ namespace kingsandpigs.Scripts
             NextState = State.Jump;
         }
 
+        public void PickHandler()
+        {
+            if (BombObj is null) return;
+            var pig = Scenes.BombPig.Instance<BombPig>();
+            pig.GlobalPosition = GlobalPosition;
+            GetParent().AddChildDefered(pig);
+            BombObj.QueueFree();
+            QueueFree();
+        }
+
         public enum State
         {
             NoState = 0,
@@ -147,6 +158,17 @@ namespace kingsandpigs.Scripts
                 OnDeath?.Invoke();
                 OnDeath = null;
             }
+        }
+        public override void OnHitBoxEnter(Area2D area)
+        {
+            if (area.GetParent<Node2D>() is Bomb b)
+                BombObj = b;
+            base.OnHitBoxEnter(area);
+        }
+        public override void OnHitBoxExited(Area2D area)
+        {
+            if (area.GetParent<Node2D>() is Bomb)
+                BombObj = null;
         }
         #endregion
     }

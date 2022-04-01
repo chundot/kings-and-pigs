@@ -21,7 +21,7 @@ namespace kingsandpigs.Scripts.UI
             _diamondLabel = GetChild<Label>(1);
             _menu = GetChild<AnimationPlayer>(2);
             _transitionPlayer = GetChild<AnimationPlayer>(3);
-            _hearts.ForEach(h => _liveBar.AddChild(h));
+            _hearts.ForEach(h => _liveBar.AddChildDefered(h));
             DiamondChange(GlobalVar.Diamond);
             TransOut();
         }

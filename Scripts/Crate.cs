@@ -31,7 +31,7 @@ public class Crate : RigidBody2D
             var node = Scenes.Frag.Instance<CrateFrag>();
             node.GlobalPosition = GlobalPosition;
             node.Set(i, Vector2.Right * dir * rnd.Next(150, 240) + Vector2.Up * rnd.Next(80, 150));
-            parent.AddChild(node);
+            parent.AddChildDefered(node);
         }
     }
 
@@ -45,7 +45,7 @@ public class Crate : RigidBody2D
             var node = Scenes.Diamond.Instance<Diamond>();
             node.GlobalPosition = GlobalPosition;
             node.Impulse = Vector2.Right * dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 90);
-            parent.AddChild(node);
+            parent.AddChildDefered(node);
         }
         num = rnd.Next(0, 2);
         if (num != 0)
@@ -53,7 +53,7 @@ public class Crate : RigidBody2D
             var node = Scenes.Heart.Instance<Heart>();
             node.GlobalPosition = GlobalPosition;
             node.Impulse = Vector2.Right * dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 80);
-            parent.AddChild(node);
+            parent.AddChildDefered(node);
         }
     }
 

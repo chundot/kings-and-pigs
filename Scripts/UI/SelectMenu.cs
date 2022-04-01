@@ -18,7 +18,7 @@ public class SelectMenu : Control
             var btn = lvlBtn.Instance<LevelBtn>();
             btn.Level = i;
             btn.OnBtnClick += GoToLevel;
-            grid.AddChild(btn);
+            grid.AddChildDefered(btn);
         }
     }
 

@@ -14,7 +14,7 @@ public class Bomb : RigidBody2D
     {
         _player = GetChild<AnimationPlayer>(1);
         _dir = GetChild<DirRayCasts>(5);
-        if (BombOn) _curState = State.On;
+        if (BombOn) TransTo(State.On);
     }
 
     public override void _PhysicsProcess(float delta)

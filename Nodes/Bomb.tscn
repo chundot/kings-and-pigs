@@ -209,7 +209,7 @@ tracks/3/keys = {
 radius = 16.0
 
 [sub_resource type="RectangleShape2D" id=91]
-extents = Vector2( 6.5, 6 )
+extents = Vector2( 6, 6 )
 
 [sub_resource type="RectangleShape2D" id=87]
 extents = Vector2( 6, 6 )
@@ -249,13 +249,12 @@ shape = SubResource( 90 )
 disabled = true
 
 [node name="HitBox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -5 )
 collision_layer = 4
-collision_mask = 11
+collision_mask = 143
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-position = Vector2( 0.5, 5 )
+position = Vector2( 0, 5 )
 shape = SubResource( 91 )
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]

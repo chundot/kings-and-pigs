@@ -6,6 +6,7 @@ namespace kingsandpigs.Scripts.Common
     public class BaseBody : KinematicBody2D
     {
         [Export] public int MaxHealth = 3;
+        [Export] public bool Triggered = false;
         public int Health = 3;
         public bool CanAttack = false;
         protected Vector2 Velocity = Vector2.Zero;
@@ -125,6 +126,10 @@ namespace kingsandpigs.Scripts.Common
                 if (tile.GetCollisionLayerBit(3) && Mathf.Abs(Velocity.y) > 8)
                     HealthChange(1);
             }
+        }
+
+        public virtual void OnHitBoxExited(Area2D area)
+        {
         }
 
         #endregion
