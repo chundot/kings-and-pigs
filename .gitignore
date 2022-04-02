@@ -4,5 +4,4 @@
 .vscode
 dist
 *.translation
-export_presets.cfg
 *.elv

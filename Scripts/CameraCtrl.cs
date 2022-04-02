@@ -8,7 +8,7 @@ public class CameraCtrl : Camera2D
     private Vector2 _calcSize = new(512, 320);
     private Vector2 _offset = new(308, 179);
     private BaseBody _player;
-    private Random _rnd = new();
+    private readonly Random _rnd = new();
     private float _shakeTimer = -.1f;
     private float _shakeOffset = 2f;
     public override void _Ready()

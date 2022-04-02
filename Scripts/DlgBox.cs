@@ -5,7 +5,7 @@ namespace kingsandpigs.Scripts
     public class DlgBox : AnimatedSprite
     {
         private float _time;
-
+        private bool _dead;
 
         public override void _PhysicsProcess(float delta)
         {
@@ -15,9 +15,23 @@ namespace kingsandpigs.Scripts
 
         public void Display(DlgType type, float time = 1f)
         {
+            if (_dead) return;
+            if (type is DlgType.DeadIn)
+            {
+                _dead = true;
+                _time = -1f;
+                return;
+            }
             Visible = true;
             Play(type.ToString());
             _time = time;
+        }
+
+        public void ShowDeath()
+        {
+            Visible = true;
+            _time = 1f;
+            Play(DlgType.DeadIn.ToString());
         }
 
         public void AnimationFinished()

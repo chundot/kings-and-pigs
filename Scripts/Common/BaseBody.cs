@@ -36,10 +36,17 @@ namespace kingsandpigs.Scripts.Common
             Dlg = GetChild<DlgBox>(4);
             Player = GetChild<AnimationPlayer>(1);
             Info = GetChild<Node2D>(2);
-            OnHealthChange += (newVal, oldVal) => Health = newVal;
+            OnHealthChange += (newVal, oldVal) =>
+            {
+                Health = newVal;
+                if (newVal == 0) Dlg.Display(DlgType.DeadIn);
+            };
             OnDeath += () =>
             {
-                if (KilledBy is not null) KilledBy.Dlg.Display(DlgType.LoserIn);
+                if (KilledBy is not null)
+                    if (this is King)
+                        KilledBy.Dlg.Display(DlgType.LoserIn);
+                Dlg.ShowDeath();
                 this.DisLayerBit(LayerEnum.Rb);
                 this.DisMaskBit(LayerEnum.Rb);
                 this.EnLayerBit(LayerEnum.DeadBody);

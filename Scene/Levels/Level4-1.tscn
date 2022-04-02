@@ -635,5 +635,6 @@ position = Vector2( 257, 216 )
 
 [node name="PigInBox" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 401, 216 )
+FaceDir = true
 
 [node name="Camera2D" parent="." instance=ExtResource( 6 )]

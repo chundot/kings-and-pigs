@@ -2320,6 +2320,7 @@ position = Vector2( -241, 88 )
 
 [node name="PigInBox2" parent="Enemies" instance=ExtResource( 8 )]
 position = Vector2( -269, 185 )
+FaceDir = true
 
 [node name="Pig2" parent="Enemies" instance=ExtResource( 9 )]
 position = Vector2( -305, 279 )

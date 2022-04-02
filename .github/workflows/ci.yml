@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+jobs:
+  export-publish:
+    runs-on: ubuntu-latest
+    env:
+      gdver: 3.4.4-stable
+      gdvern: 3.4.4
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: 设置.NET Core SDK 6
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+      - name: 缓存Godot
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            Godot_v${{env.gdver}}_mono_linux_headless_64
+            ~/.local/share/godot/templates/
+          key: ${{env.gdver}}
+      - name: 安装Godot
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          wget -q https://github.com/godotengine/godot/releases/download/${gdver}/${gdfile}.zip
+          unzip ${gdfile}.zip
+          wget -q https://github.com/godotengine/godot/releases/download/${gdver}/Godot_v${gdver}_mono_export_templates.tpz
+          unzip Godot_v${gdver}_mono_export_templates.tpz
+          mkdir -p ~/.local/share/godot/templates/
+          mv templates ~/.local/share/godot/templates/${gdvern}.stable.mono
+        env:
+          gdfile: Godot_v${{env.gdver}}_mono_linux_headless_64
+          gdfolder: ./${{env.gdfile}}
+
+      - name: 导出
+        run: |
+          mkdir -p dist/kings-and-pigs-html
+          mkdir dist/kings-and-pigs-win
+          $godot --quiet --export h5 dist/kings-and-pigs-html/index.html
+          $godot --quiet --export win dist/kings-and-pigs-win/kap.exe
+        env:
+          godot: ./Godot_v${{env.gdver}}_mono_linux_headless_64/Godot_v${{env.gdver}}_mono_linux_headless.64
+
+      - name: 设置butler
+        run: |
+          BUTLER_API_KEY=secrets.BUTLER_API_KEY
+          mkdir -p ~/.config/itch
+          curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+          unzip butler.zip
+          chmod +x butler
+      - name: butler推送
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          ./butler push ./dist/kings-and-pigs-html chundot/kings-and-pigs:html
+          ./butler push ./dist/kings-and-pigs-win chundot/kings-and-pigs:win

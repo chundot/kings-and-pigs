@@ -9,8 +9,7 @@ namespace kingsandpigs.Scripts
         private Area2D _target;
         private int _dir = 1;
         private float _timer = 2f;
-        private Random _rnd = new();
-        [Export] public bool Triggered;
+        private readonly Random _rnd = new();
         public override void _Ready()
         {
             CurState = State.Idle;
