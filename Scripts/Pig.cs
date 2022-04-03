@@ -79,7 +79,7 @@ namespace kingsandpigs.Scripts
         {
             SpeedHandler(.05f);
             if (IsOnFloor())
-                return Health > 0 ? State.Idle : State.Dead;
+                return Health > 0 ? State.Idle : CurState;
             return CurState;
         }
 
@@ -167,7 +167,9 @@ namespace kingsandpigs.Scripts
                 State.Ground => State.Idle,
                 _ => NextState
             };
-            if (state is State.Dead)
+            if (state is State.Hit && Health <= 0)
+                NextState = State.Dead;
+            else if (state is State.Dead)
             {
                 OnDeath?.Invoke();
                 OnDeath = null;

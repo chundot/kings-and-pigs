@@ -184,12 +184,13 @@ public class King : BaseStatedBody<King.State>
             State.DoorOut => State.Idle,
             _ => NextState
         };
-        if (state is State.Dead)
+        if (state is State.Hit && Health <= 0) NextState = State.Dead;
+        else if (state is State.Dead)
         {
             OnDeath?.Invoke();
             OnDeath = null;
         }
-        if (state is State.DoorIn)
+        else if (state is State.DoorIn)
         {
             Visible = false;
             OnNextLevel?.Invoke();
