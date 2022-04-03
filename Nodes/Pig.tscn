@@ -145,28 +145,16 @@ tracks/3/keys = {
 "values": [ true ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("CollisionShape2D:shape:extents")
+tracks/4/path = NodePath("SpriteAnchor/Sprite:offset")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 5, 8.5 ), Vector2( 4, 6 ), Vector2( 3.5, 6 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0.5 ), Vector2( 3, 3 ), Vector2( 5.5, 3 ) ]
+"values": [ Vector2( -3, -5 ), Vector2( -6, -5 ), Vector2( -7, -5 ), Vector2( -8, -5 ) ]
 }
 
 [sub_resource type="Animation" id=58]
@@ -406,30 +394,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("CollisionShape2D:shape:extents")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 5, 8.5 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("CollisionShape2D:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0.5 ) ]
-}
 
 [sub_resource type="Animation" id=52]
 resource_name = "Jump"
@@ -582,6 +546,18 @@ tracks/6/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0.5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("SpriteAnchor/Sprite:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -3, -5 ) ]
 }
 
 [sub_resource type="Animation" id=54]
