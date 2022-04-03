@@ -16,6 +16,7 @@ namespace kingsandpigs.Scripts
         {
             CurState = State.Idle;
             base._Ready();
+            _dir = Body.FaceDir ? -1 : 1;
         }
 
         protected override void StateUpdate(float delta)
