@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/15-Font/CleanVictory.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://Assets/16-UI/Banner0.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Resource/Btn0.tres" type="StyleBox" id=5]
 [ext_resource path="res://Assets/17-Sound/select_003.ogg" type="AudioStream" id=6]
 [ext_resource path="res://Assets/17-Sound/pluck_001.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Nodes/HUD/TitleBg.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Nodes/HUD/Trans.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scripts/UI/SelectMenu.cs" type="Script" id=10]
 
@@ -28,9 +29,6 @@ margin_right = -768.0
 margin_bottom = -480.0
 rect_scale = Vector2( 4, 4 )
 script = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -113,6 +111,8 @@ volume_db = -12.0
 
 [node name="Click" type="AudioStreamPlayer" parent="SfxMgr"]
 stream = ExtResource( 6 )
+
+[node name="TitleBg" parent="." instance=ExtResource( 8 )]
 
 [connection signal="mouse_entered" from="Panel/Back" to="." method="OnHover"]
 [connection signal="pressed" from="Panel/Back" to="." method="OnBack"]

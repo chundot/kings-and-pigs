@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Kings and Pigs.png" type="Texture" id=1]
 [ext_resource path="res://Assets/15-Font/CleanPlate.fnt" type="BitmapFont" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Nodes/SfxMgr.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/17-Sound/pluck_001.ogg" type="AudioStream" id=7]
 [ext_resource path="res://Assets/17-Sound/select_003.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Nodes/HUD/TitleBg.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.247059, 0.219608, 0.317647, 0.862745 )
@@ -97,6 +98,8 @@ volume_db = -12.0
 
 [node name="Click" type="AudioStreamPlayer" parent="SfxMgr"]
 stream = ExtResource( 8 )
+
+[node name="TitleBg" parent="." instance=ExtResource( 9 )]
 
 [connection signal="mouse_entered" from="Panel/Start" to="." method="OnHover"]
 [connection signal="pressed" from="Panel/Start" to="." method="OnStart"]
