@@ -3,7 +3,7 @@ using kingsandpigs.Scripts.Common;
 
 public class Bomb : RigidBody2D
 {
-    private State _curState = State.Off;
+    public State CurState = State.Off;
     private State _nextState;
     private AnimationPlayer _player;
     private float _timer = .1f;
@@ -19,51 +19,51 @@ public class Bomb : RigidBody2D
 
     public override void _PhysicsProcess(float delta)
     {
-        var state = _curState switch
+        var state = CurState switch
         {
             State.Off => Off(),
             State.On => On(delta),
             State.Boom => Boom(),
-            _ => _curState,
+            _ => CurState,
         };
         if (_nextState != 0)
         {
             state = _nextState;
             _nextState = 0;
         }
-        if (_curState != state) TransTo(state);
+        if (CurState != state) TransTo(state);
     }
 
     private State Off()
     {
-        return _curState;
+        return CurState;
     }
 
     private State On(float delta)
     {
         _timer -= delta;
-        return _curState;
+        return CurState;
     }
 
     private State Boom()
     {
         GravityScale = 0;
         LinearVelocity = Vector2.Zero;
-        return _curState;
+        return CurState;
     }
 
     private void TransTo(State state)
     {
         if (state is State.On) _dir.Enable();
-        _curState = state;
-        if (_curState is State.Boom)
+        CurState = state;
+        if (CurState is State.Boom)
             GlobalEvent.CameraShake?.Invoke(.15f, 8);
         _player.Play(state.ToString());
     }
 
     public void OnHitBoxBodyEntered(Node2D _)
     {
-        if (_curState is State.On && _timer < 0)
+        if (CurState is State.On && _timer < 0)
         {
             GetChild<Sprite>(0).RotationDegrees = _dir.GetDir();
             _nextState = State.Boom;
@@ -72,7 +72,8 @@ public class Bomb : RigidBody2D
 
     public void OnHitBoxEntered(Area2D area)
     {
-        switch (_curState)
+        if (area.GetParent<Node2D>() is FlyingCrate) return;
+        switch (CurState)
         {
             case State.Boom:
                 return;
@@ -96,7 +97,7 @@ public class Bomb : RigidBody2D
             QueueFree();
     }
 
-    enum State
+    public enum State
     {
         NoState = 0,
         Off,

@@ -8,7 +8,7 @@ You can try it on: https://chundot.itch.io/kings-and-pigs
 
 ## Build Environment
 
-- Godot Mono 3.4.2
+- Godot Mono 3.4.4
 - .NET 6 SDK
 
 ## Todos
@@ -29,7 +29,7 @@ You can try it on: https://chundot.itch.io/kings-and-pigs
   - [ ] at least 10 levels.
 - [ ] enemy ai;
   - [x] normal pig;
-  - [ ] crate pig;
+  - [x] crate pig;
   - [x] pig in crate;
   - [x] bomb pig;
   - [ ] pig with march;

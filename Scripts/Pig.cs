@@ -7,7 +7,7 @@ namespace kingsandpigs.Scripts
     public class Pig : BaseStatedBody<Pig.State>
     {
         public bool Dmged;
-        public Bomb BombObj;
+        public object Obj;
         public override void _Ready()
         {
             Speed = 160;
@@ -122,12 +122,26 @@ namespace kingsandpigs.Scripts
 
         public void PickHandler()
         {
-            if (BombObj is null) return;
-            var pig = Scenes.BombPig.Instance<BombPig>();
-            pig.GlobalPosition = GlobalPosition;
-            GetParent().AddChildDefered(pig);
-            BombObj.QueueFree();
-            QueueFree();
+            if (Obj is null) return;
+            if (Obj is Bomb b)
+            {
+                if (b.CurState is not Bomb.State.Off) return;
+                var pig = Scenes.BombPig.Instance<BombPig>();
+                pig.GlobalPosition = GlobalPosition;
+                GetParent().AddChildDefered(pig);
+                pig.FaceDir = SpriteAnchor.Scale.x > 0;
+                b.QueueFree();
+                QueueFree();
+            }
+            else if (Obj is Crate c)
+            {
+                var pig = Scenes.CratePig.Instance<CratePig>();
+                pig.GlobalPosition = GlobalPosition;
+                GetParent().AddChildDefered(pig);
+                pig.FaceDir = SpriteAnchor.Scale.x > 0;
+                c.QueueFree();
+                QueueFree();
+            }
         }
 
         public enum State
@@ -161,14 +175,17 @@ namespace kingsandpigs.Scripts
         }
         public override void OnHitBoxEnter(Area2D area)
         {
-            if (area.GetParent<Node2D>() is Bomb b)
-                BombObj = b;
+            var parent = area.GetParent<Node2D>();
+            if (parent is Bomb b)
+                Obj = b;
+            else if (parent is Crate c)
+                Obj = c;
             base.OnHitBoxEnter(area);
         }
         public override void OnHitBoxExited(Area2D area)
         {
-            if (area.GetParent<Node2D>() is Bomb)
-                BombObj = null;
+            if (area.GetParent<Node2D>() == Obj)
+                Obj = null;
         }
         #endregion
     }

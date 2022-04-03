@@ -2,12 +2,14 @@ using System;
 using Godot;
 using kingsandpigs.Scripts.Common;
 
-public class Crate : RigidBody2D
+public class FlyingCrate : RigidBody2D
 {
+
     private AnimatedSprite _sprite;
     private AudioStreamPlayer _audio;
+    public bool FaceRight = false;
+    private float _timer = .2f;
     private int _dir = 0;
-    [Export] public bool FaceRight = false;
     public override void _Ready()
     {
         _sprite = GetChild<AnimatedSprite>(0);
@@ -15,24 +17,9 @@ public class Crate : RigidBody2D
         _sprite.FlipH = FaceRight;
     }
 
-    public void ToHit()
+    public override void _PhysicsProcess(float delta)
     {
-        GlobalEvent.CameraShake?.Invoke(.08f, 4);
-        _sprite.Play("Hit");
-        _audio.Play();
-    }
-
-    private void GenerateFragments()
-    {
-        var rnd = new Random();
-        var parent = GetParent();
-        for (var i = 0; i < 4; i++)
-        {
-            var node = Scenes.Frag.Instance<CrateFrag>();
-            node.GlobalPosition = GlobalPosition;
-            node.Set(i, Vector2.Right * _dir * rnd.Next(150, 240) + Vector2.Up * rnd.Next(80, 150));
-            parent.AddChildDefered(node);
-        }
+        if (_timer > 0) _timer -= delta;
     }
 
     private void GenerateRndItems()
@@ -47,14 +34,29 @@ public class Crate : RigidBody2D
             node.Impulse = Vector2.Right * _dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 90);
             parent.AddChildDefered(node);
         }
-        num = rnd.Next(0, 2);
-        if (num != 0)
+    }
+
+    private void GenerateFragments()
+    {
+        GenerateRndItems();
+        var rnd = new Random();
+        var parent = GetParent();
+        for (var i = 0; i < 4; i++)
         {
-            var node = Scenes.Heart.Instance<Heart>();
+            var node = Scenes.Frag.Instance<CrateFrag>();
             node.GlobalPosition = GlobalPosition;
-            node.Impulse = Vector2.Right * _dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 80);
+            node.Set(i, Vector2.Right * _dir * rnd.Next(-40, 120) + Vector2.Up * rnd.Next(40, 90));
             parent.AddChildDefered(node);
         }
+    }
+
+    public void ToHit()
+    {
+        if (_timer > 0) return;
+        GlobalEvent.CameraShake?.Invoke(.08f, 4);
+        GetNode<CollisionShape2D>("HitBox/CollisionShape2D").SetDeferred("disabled", true);
+        _sprite.Play("Hit");
+        _audio.Play();
     }
 
     public void OnAnimationFinished()
@@ -62,23 +64,21 @@ public class Crate : RigidBody2D
         if (_sprite.Animation == "Hit")
         {
             GenerateFragments();
-            GenerateRndItems();
             _sprite.Visible = false;
             GetChild<CollisionShape2D>(3).Disabled = true;
         }
     }
 
-    public void AudioFinished()
+    public void OnHitBoxBodyEntered(Node2D body)
     {
-        QueueFree();
-    }
-
-    public void OnHitBoxEntered(Area2D body)
-    {
-        if (!body.GetLayerBit(LayerEnum.AttackBox)) return;
         if (_sprite.Animation == "Hit") return;
         var x = GlobalPosition.x - body.GlobalPosition.x;
         _dir = x > 0 ? 1 : -1;
         ToHit();
+    }
+
+    public void AudioFinished()
+    {
+        QueueFree();
     }
 }
